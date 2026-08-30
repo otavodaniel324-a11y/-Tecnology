@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesion</title>
+  <link rel="shortcut icon" href="Imagenes/Imagen.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    /* Estilo de la barra de desplazamiento personalizada (Scrollbar) */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #02040a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3e444c;
+      border-radius: 20px;
+      border: 2px solid #02040a;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0cf5ff;
+      box-shadow: 0 0 10px #0cf5ff;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: #02040a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── FONDO ÉPICO TECNOLÓGICO Y NEÓN ── */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+    }
+
+    .cyber-glow {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(12, 245, 255, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(255, 60, 111, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(4, 15, 38, 0.8) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .tech-grid {
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background-image: 
+        linear-gradient(to right, rgba(12, 245, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(12, 245, 255, 0.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      transform: perspective(600px) rotateX(65deg);
+      animation: gridMove 8s linear infinite;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    @keyframes gridMove {
+      0% { transform: perspective(600px) rotateX(65deg) translateY(0); }
+      100% { transform: perspective(600px) rotateX(65deg) translateY(60px); }
+    }
+
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #0cf5ff, #ff3c6f, transparent);
+      box-shadow: 0 0 15px #0cf5ff, 0 0 30px #ff3c6f;
+      z-index: 4;
+      opacity: 0.8;
+      animation: scanAnimation 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes scanAnimation {
+      0% { top: -2%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { top: 102%; opacity: 0; }
+    }
+
+    /* ── CONTENEDOR DESLIZABLE Y BOTÓN LATERAL ── */
+    .login-wrapper {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .login-wrapper.oculto {
+      transform: translate(calc(100% - 24px), -50%);
+    }
+
+    /* Botón flotante idéntico a la imagen */
+    .toggle-drawer-btn {
+      width: 14px;
+      height: 100px;
+      background: #3e444c;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px 0 0 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.5);
+      user-select: none;
+    }
+
+    .toggle-drawer-btn:hover {
+      background: #0cf5ff;
+      box-shadow: -4px 0 18px rgba(12, 245, 255, 0.6);
+    }
+
+    .card-container {
+      width: 420px;
+      padding: 20px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    /* Card principal con efecto Neón */
+    .login-card {
+      background: rgba(4, 8, 20, 0.82);
+      border: 1px solid rgba(12, 245, 255, 0.4);
+      border-radius: 28px;
+      padding: 44px 40px;
+      backdrop-filter: blur(25px);
+      box-shadow:
+        0 0 30px rgba(12, 245, 255, 0.2),
+        inset 0 0 15px rgba(12, 245, 255, 0.1),
+        0 20px 60px rgba(0,0,0,0.8);
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .logo-icon img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      filter: drop-shadow(0 0 20px rgba(12,245,255,0.5));
+    }
+
+    .login-logo h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.6rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #0cf5ff, #ff3c6f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(12, 245, 255, 0.3);
+    }
+
+    .login-logo p {
+      color: #7a8cae;
+      font-size: 0.83rem;
+      margin-top: 9px;
+      letter-spacing: 1px;
+    }
+
+    .tabs {
+      display: flex;
+      background: #04252b;
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(12, 245, 255, 0.3);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: none;
+      color: #5a709c;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #0cf5ff22, #ff3c6f11);
+      color: #0cf5ff;
+      border: 1px solid #0cf5ff66;
+      box-shadow: 0 0 10px rgba(12,245,255,0.2);
+    }
+
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      color: #7ecfff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .form-group input {
+      background: rgba(6, 10, 20, 0.9);
+      border: 1px solid #1a273d;
+      border-radius: 12px;
+      padding: 13px 16px;
+      color: #eef2ff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.25s;
+    }
+    .form-group input:focus {
+      border-color: #0cf5ff;
+      box-shadow: 0 0 15px rgba(12,245,255,0.3);
+    }
+    .form-group input.error {
+      border-color: #ff3c6f;
+      box-shadow: 0 0 10px rgba(255,60,111,0.3);
+    }
+
+    .input-password-wrap {
+      position: relative;
+    }
+    .input-password-wrap input {
+      width: 100%;
+      padding-right: 44px;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #5a6a8a;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .toggle-password:hover { color: #0cf5ff; }
+
+    .error-msg {
+      color: #ff3c6f;
+      font-size: 0.75rem;
+      min-height: 14px;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #0cf5ff, #0091a8);
+      border: none;
+      border-radius: 14px;
+      color: #080a10;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-login:hover {
+      transform: scale(0.98);
+      box-shadow: 0 0 24px rgba(12,245,255,0.5);
+    }
+    .btn-register {
+      background: linear-gradient(135deg, #ff3c6f, #c0392b);
+    }
+    .btn-register:hover {
+      box-shadow: 0 0 24px rgba(255,60,111,0.5);
+    }
+
+    .resultado {
+      margin-top: 18px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-align: center;
+      display: none;
+    }
+    .resultado.exito {
+      background: rgba(0,230,118,0.1);
+      border: 1px solid #00e676;
+      color: #00e676;
+      display: block;
+    }
+    .resultado.fallo {
+      background: rgba(255,60,111,0.1);
+      border: 1px solid #ff3c6f;
+      color: #ff3c6f;
+      display: block;
+    }
+
+    .bienvenida {
+      display: none;
+      text-align: center;
+    }
+    .bienvenida.visible { display: block; }
+    .bienvenida .avatar {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, #0cf5ff22, #ff3c6f22);
+      border: 2px solid #0cf5ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 20px;
+    }
+    .bienvenida h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.2rem;
+      color: #eef2ff;
+      margin-bottom: 8px;
+    }
+    .bienvenida p { color: #5a6a8a; font-size: 0.9rem; margin-bottom: 24px; }
+    .bienvenida .info-usuario {
+      background: #080a10;
+      border: 1px solid #1a1d28;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .btn-cerrar {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid #ff3c6f;
+      border-radius: 14px;
+      color: #ff3c6f;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-transform: uppercase;
+    }
+    .btn-cerrar:hover {
+      background: #ff3c6f;
+      color: white;
+    }
+
+    .usuarios-lista {
+      margin-top: 16px;
+      background: #080a10;
+      border: 1px solid #1a1d28;
+      border-radius: 14px;
+      padding: 14px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .usuarios-lista h4 {
+      color: #5a6a8a;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .usuario-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #1a1d2840;
+      font-size: 0.82rem;
+    }
+    .usuario-item:last-child { border-bottom: none; }
+    .usuario-item .u-avatar {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg,#0cf5ff33,#ff3c6f22);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; color: #0cf5ff; font-weight: 800;
+      flex-shrink: 0;
+    }
+    .usuario-item .u-nombre { color: #eef2ff; font-weight: 700; }
+    .usuario-item .u-email  { color: #5a6a8a; font-size: 0.75rem; }
+  </style>
+</head>
+<body>
+
+<div class="cyber-glow"></div>
+<div class="tech-grid"></div>
+<div class="scan-line"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- Panel lateral deslizable -->
+<div class="login-wrapper" id="loginWrapper">
+  <!-- Botón de arrastre/pestaña Vertical -->
+  <div class="toggle-drawer-btn" onclick="toggleDrawer()" title="Ocultar/Mostrar panel"></div>
+
+  <div class="card-container">
+    <div class="login-card" id="login-card">
+
+      <div class="login-logo">
+        <div class="logo-icon">
+          <img src="Imagenes/F1.webp" alt="Logo">
+          <h1>TECNOLOGY</h1>
+        </div>
+        <p>Sistema de gestión de clientes</p>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="cambiarTab('login')">Iniciar Sesión</button>
+        <button class="tab-btn" onclick="cambiarTab('registro')">Registrarse</button>
+      </div>
+
+      <!-- PANEL LOGIN -->
+      <div class="form-panel active" id="panel-login">
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" id="login-email" placeholder="Correo@gmail.com">
+          <span class="error-msg" id="err-login-email"></span>
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <div class="input-password-wrap">
+            <input type="password" id="login-password" placeholder="••••••••">
+            <button class="toggle-password" onclick="togglePassword('login-password', this)">👁️</button>
+          </div>
+          <span class="error-msg" id="err-login-password"></span>
+        </div>
+        <button class="btn-login" onclick="iniciarSesion()">ENTRAR</button>
+        <div class="resultado" id="resultado-login"></div>
+      </div>
+
+      <!-- PANEL REGISTRO -->
+      <div class="form-panel" id="panel-registro">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" id="reg-nombre" placeholder="Tu nombre">
+          <span class="error-msg" id="err-reg-nombre"></span>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" id="reg-email" placeholder="Correo@gmail.com">
+          <span class="error-msg" id="err-reg-email"></span>
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <div class="input-password-wrap">
+            <input type="password" id="reg-password" placeholder="••••••••">
+            <button class="toggle-password" onclick="togglePassword('reg-password', this)">👁️</button>
+          </div>
+          <span class="error-msg" id="err-reg-password"></span>
+        </div>
+        <div class="form-group">
+          <label>Confirmar Contraseña</label>
+          <div class="input-password-wrap">
+            <input type="password" id="reg-confirm-password" placeholder="••••••••">
+            <button class="toggle-password" onclick="togglePassword('reg-confirm-password', this)">👁️</button>
+          </div>
+          <span class="error-msg" id="err-reg-confirm-password"></span>
+        </div>
+        <button class="btn-login btn-register" onclick="registrarUsuario()">REGISTRARSE</button>
+        <div class="resultado" id="resultado-registro"></div>
+
+        <div class="usuarios-lista" id="lista-usuarios">
+          <h4>Usuarios en la base de datos</h4>
+          <div id="usuarios-items"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PANEL BIENVENIDA -->
+    <div class="login-card bienvenida" id="panel-bienvenida">
+      <div class="avatar">👤</div>
+      <h2 id="bienvenida-nombre">¡Bienvenido!</h2>
+      <p>Has Inicio sesión correctamente</p>
+      <div class="info-usuario" id="info-usuario"></div>
+      <button class="btn-cerrar" onclick="cerrarSesion()">🔒 Cerrar Sesión</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Alternar Visibilidad del Panel Deslizable */
+function toggleDrawer() {
+  const wrapper = document.getElementById('loginWrapper');
+  wrapper.classList.toggle('oculto');
+}
+
+/* Fondo Interactivo */
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+
+const mouse = { x: width / 2, y: height / 2, radius: 150 };
+
+window.addEventListener('mousemove', (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+window.addEventListener('resize', () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+});
+
+const particles = [];
+const particleCount = 100;
+
+class TechParticle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = (Math.random() - 0.5) * 1.5;
+    this.vy = (Math.random() - 0.5) * 1.5;
+    this.size = Math.random() * 2.5 + 1;
+    this.color = Math.random() > 0.4 ? '#0cf5ff' : '#ff3c6f';
+    this.alpha = Math.random() * 0.7 + 0.3;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > width) this.vx *= -1;
+    if (this.y < 0 || this.y > height) this.vy *= -1;
+
+    const dx = mouse.x - this.x;
+    const dy = mouse.y - this.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < mouse.radius) {
+      const angle = Math.atan2(dy, dx);
+      const force = (mouse.radius - dist) / mouse.radius;
+      this.x -= Math.cos(angle) * force * 3;
+      this.y -= Math.sin(angle) * force * 3;
+    }
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.globalAlpha = this.alpha;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = this.color;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
+  }
+}
+
+for (let i = 0; i < particleCount; i++) particles.push(new TechParticle());
+
+function renderTechBackground() {
+  ctx.clearRect(0, 0, width, height);
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].update();
+    particles[i].draw();
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 150) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = particles[i].color === particles[j].color ? particles[i].color : 'rgba(12, 245, 255, 0.5)';
+        ctx.globalAlpha = (1 - distance / 150) * 0.35;
+        ctx.lineWidth = 0.9;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+    }
+  }
+  requestAnimationFrame(renderTechBackground);
+}
+renderTechBackground();
+
+/* Lógica de Usuarios */
+let USUARIOS_DB = JSON.parse(localStorage.getItem('usuarios_db')) || [
+  { id:1, Nombre:'Daniel Otavo', Email:'otavodaniel324@gmail.com', Password:'1234', FechaCreado:'2025-01-10' },
+  { id:2, Nombre:'Isabella', Email:'isabella@gmail.com', Password:'abcd', FechaCreado:'2025-01-11' },
+  { id:3, Nombre:'Jorge', Email:'jorge@gmail.com', Password:'5678', FechaCreado:'2025-01-12' },
+];
+
+function guardarDB() {
+  localStorage.setItem('usuarios_db', JSON.stringify(USUARIOS_DB));
+}
+
+function cambiarTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  if (tab === 'login') {
+    document.querySelectorAll('.tab-btn')[0].classList.add('active');
+    document.getElementById('panel-login').classList.add('active');
+  } else {
+    document.querySelectorAll('.tab-btn')[1].classList.add('active');
+    document.getElementById('panel-registro').classList.add('active');
+    renderizarUsuarios();
+  }
+}
+
+function togglePassword(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    btn.textContent = '👁️';
+  }
+}
+
+function iniciarSesion() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value.trim();
+  const resultado = document.getElementById('resultado-login');
+  let valido = true;
+
+  document.getElementById('err-login-email').textContent = '';
+  document.getElementById('err-login-password').textContent = '';
+  resultado.className = 'resultado';
+  resultado.style.display = 'none';
+
+  if (!email) {
+    document.getElementById('err-login-email').textContent = 'Ingresa tu correo';
+    document.getElementById('login-email').classList.add('error');
+    valido = false;
+  }
+  if (!password) {
+    document.getElementById('err-login-password').textContent = 'Ingresa tu contraseña';
+    document.getElementById('login-password').classList.add('error');
+    valido = false;
+  }
+  if (!valido) return;
+
+  const usuario = USUARIOS_DB.find(u => u.Email.toLowerCase() === email.toLowerCase() && u.Password === password);
+  if (usuario) {
+    mostrarBienvenida(usuario);
+  } else {
+    resultado.textContent = '❌ Credenciales incorrectas';
+    resultado.className = 'resultado fallo';
+  }
+}
+
+function registrarUsuario() {
+  const nombre = document.getElementById('reg-nombre').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value.trim();
+  const resultado = document.getElementById('resultado-registro');
+  let valido = true;
+
+  ['reg-nombre','reg-email','reg-password'].forEach(id => document.getElementById(id).classList.remove('error'));
+  ['err-reg-nombre','err-reg-email','err-reg-password'].forEach(id => document.getElementById(id).textContent = '');
+  resultado.className = 'resultado';
+
+  if (!nombre || nombre.length < 3) {
+    document.getElementById('err-reg-nombre').textContent = 'Mínimo 3 caracteres';
+    document.getElementById('reg-nombre').classList.add('error');
+    valido = false;
+  }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('err-reg-email').textContent = 'Correo inválido';
+    document.getElementById('reg-email').classList.add('error');
+    valido = false;
+  }
+  if (!password || password.length < 4) {
+    document.getElementById('err-reg-password').textContent = 'Mínimo 4 caracteres';
+    document.getElementById('reg-password').classList.add('error');
+    valido = false;
+  }
+  if (!valido) return;
+
+  if (USUARIOS_DB.find(u => u.Email.toLowerCase() === email.toLowerCase())) {
+    document.getElementById('err-reg-email').textContent = 'Este correo ya existe';
+    document.getElementById('reg-email').classList.add('error');
+    return;
+  }
+
+  const nuevoUsuario = { id: USUARIOS_DB.length + 1, Nombre: nombre, Email: email, Password: password, FechaCreado: new Date().toISOString().split('T')[0] };
+  USUARIOS_DB.push(nuevoUsuario);
+  guardarDB();
+
+  resultado.textContent = `✅ Usuario ${nombre} registrado`;
+  resultado.className = 'resultado exito';
+  document.getElementById('reg-nombre').value = '';
+  document.getElementById('reg-email').value = '';
+  document.getElementById('reg-password').value = '';
+  renderizarUsuarios();
+}
+
+function renderizarUsuarios() {
+  const contenedor = document.getElementById('usuarios-items');
+  contenedor.innerHTML = '';
+  USUARIOS_DB.forEach(u => {
+    const div = document.createElement('div');
+    div.className = 'usuario-item';
+    div.innerHTML = `
+      <div class="u-avatar">${u.Nombre.charAt(0).toUpperCase()}</div>
+      <div>
+        <div class="u-nombre">${u.Nombre}</div>
+        <div class="u-email">${u.Email}</div>
+      </div>`;
+    contenedor.appendChild(div);
+  });
+}
+
+function mostrarBienvenida(usuario) {
+  const resultado = document.getElementById('resultado-login');
+  resultado.textContent = `✅ Bienvenido ${usuario.Nombre}, redirigiendo...`;
+  resultado.className = 'resultado exito';
+
+  setTimeout(() => {
+    window.location.href = 'TECNOLOGY.html';
+  }, 1000);
+}
+
+function cerrarSesion() {
+  document.getElementById('login-card').style.display = 'block';
+  document.getElementById('panel-bienvenida').style.display = 'none';
+  cambiarTab('login');
+}
+</script>
+</body>
+</html>

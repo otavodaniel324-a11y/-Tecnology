@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TECNOLOGY S.A.S — Contactos</title>
+  <link rel="shortcut icon" href="Imagenes/Imagen.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ══════════════ ESTILOS GLOBALES & NEÓN ══════════════ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #05070f;
+      color: #eef2ff;
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* FONDO ANIMADO CANVAS */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ══════════════ HEADER Y NAV ══════════════ */
+    .header {
+      background: rgba(10, 12, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(12, 245, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .menu-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #0cf5ff;
+      text-decoration: none;
+      text-shadow: 0 0 10px rgba(12, 245, 255, 0.5);
+    }
+
+    #menu { display: none; }
+    .menu-icono { width: 30px; cursor: pointer; display: none; filter: drop-shadow(0 0 4px #ff3c6f); }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #b0bedb;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #0cf5ff;
+      text-shadow: 0 0 8px #0cf5ff;
+    }
+
+    /* CARRITO */
+    .submenu { list-style: none; position: relative; }
+    #img-carrito { width: 30px; cursor: pointer; filter: drop-shadow(0 0 5px #ff3c6f); }
+    #carrito {
+      position: absolute;
+      right: 0;
+      top: 40px;
+      background: rgba(15, 20, 35, 0.95);
+      border: 1px solid #0cf5ff;
+      border-radius: 8px;
+      padding: 15px;
+      display: none;
+      width: 300px;
+      box-shadow: 0 0 15px rgba(12, 245, 255, 0.3);
+    }
+    .submenu:hover #carrito { display: block; }
+
+    /* HERO */
+    .page-hero {
+      text-align: center;
+      padding: 50px 20px 30px;
+    }
+
+    .page-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+
+    /* ══════════════ SECCIÓN CONTACTO GRID ══════════════ */
+    .contacto-section { padding: 40px 20px; }
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .contacto-grid { grid-template-columns: 1fr; }
+    }
+
+    /* INFORMACIÓN DE CONTACTO */
+    .contacto-info h2, .contacto-form-wrap h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      margin-bottom: 25px;
+      background: rgba(15, 20, 35, 0.5);
+      border: 1px solid rgba(12, 245, 255, 0.15);
+      padding: 15px 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+    }
+
+    .info-icon { font-size: 1.8rem; }
+    .info-item strong { color: #0cf5ff; display: block; font-size: 1.1rem; margin-bottom: 3px; }
+    .info-item p { color: #b0bedb; font-size: 0.95rem; }
+
+    .redes-contacto {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .red-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(15, 20, 35, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .red-btn:hover {
+      border-color: #ff3c6f;
+      color: #ff3c6f;
+      box-shadow: 0 0 10px rgba(255, 60, 111, 0.4);
+    }
+
+    /* FORMULARIO DE CONTACTO NEÓN */
+    .contacto-form-wrap {
+      background: rgba(15, 20, 35, 0.75);
+      border: 1px solid rgba(255, 60, 111, 0.3);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(255, 60, 111, 0.1);
+    }
+
+    .contacto-form { display: flex; flex-direction: column; gap: 18px; margin-top: 20px; }
+    .form-row { display: flex; gap: 15px; }
+
+    @media (max-width: 600px) {
+      .form-row { flex-direction: column; }
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; position: relative; }
+    .form-group label { font-size: 0.95rem; font-weight: 700; color: #0cf5ff; }
+
+    .form-group input, .form-group select, .form-group textarea {
+      background: rgba(5, 7, 15, 0.8);
+      border: 1px solid rgba(12, 245, 255, 0.3);
+      border-radius: 8px;
+      padding: 12px 15px;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: #ff3c6f;
+      box-shadow: 0 0 10px rgba(255, 60, 111, 0.4);
+    }
+
+    .char-counter {
+      align-self: flex-end;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: -2px;
+    }
+
+    .error-msg {
+      color: #ff3c6f;
+      font-size: 0.8rem;
+      height: 14px;
+      font-weight: bold;
+    }
+
+    .btn-submit {
+      background: linear-gradient(90deg, #ff3c6f, #0cf5ff);
+      border: none;
+      color: #fff;
+      padding: 14px;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+      box-shadow: 0 0 15px rgba(255, 60, 111, 0.4);
+    }
+
+    .btn-submit:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 25px rgba(12, 245, 255, 0.6);
+    }
+
+    .form-exito {
+      background: rgba(0, 255, 136, 0.15);
+      border: 1px solid #00ff88;
+      color: #00ff88;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* MAPA */
+    .mapa-section { padding: 40px 20px; }
+    .section-title { text-align: center; font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 25px; }
+    .section-title span { color: #0cf5ff; }
+
+    .mapa-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #0cf5ff;
+      box-shadow: 0 0 20px rgba(12, 245, 255, 0.2);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #020307;
+      border-top: 1px solid rgba(255, 60, 111, 0.3);
+      padding: 40px 20px 20px;
+      margin-top: 50px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .link h3 { font-family: 'Orbitron'; color: #0cf5ff; font-size: 1.1rem; margin-bottom: 12px; }
+    .link ul { list-style: none; }
+    .link ul li a { color: #94a3b8; text-decoration: none; display: block; margin-bottom: 6px; }
+    .link ul li a:hover { color: #ff3c6f; }
+
+    .social-links { display: flex; flex-direction: column; gap: 8px; }
+    .social-btn { color: #fff; text-decoration: none; }
+
+    .footer-copy { text-align: center; color: #64748b; font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- CANVAS FONDO NEÓN -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- NAV -->
+  <header class="header header-slim">
+    <div class="menu-container">
+      <a href="index.html" class="logo">TECNOLOGY</a>
+      <input type="checkbox" id="menu">
+      <label for="menu"><img src="Imagenes/menu.png" class="menu-icono" alt="menú"></label>
+      <nav class="navbar">
+        <ul>
+          <li><a href="productos.html" class="nav-link">PRODUCTOS</a></li>
+          <li><a href="servicios.html" class="nav-link">SERVICIOS</a></li>
+          <li><a href="contactos.html" class="nav-link active">CONTACTOS</a></li>
+        </ul>
+      </nav>
+      <div>
+        <ul>
+          <li class="submenu">
+            <img src="Imagenes/Car2.png" id="img-carrito" alt="carrito">
+            <div id="carrito">
+              <table id="lista-carrito">
+                <thead><tr><th>Imagen</th><th>Nombre</th><th>Precio</th><th></th></tr></thead>
+                <tbody></tbody>
+              </table>
+              <a href="#" id="vaciar-carrito" class="btn-3">vaciar carrito</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-hero container">
+      <h1 class="page-title">CONTÁCTANOS</h1>
+      <p>Estamos aquí para ayudarte. Escríbenos o visítanos</p>
+    </div>
+  </header>
+
+  <!-- CONTACTO GRID -->
+  <section class="contacto-section container">
+    <div class="contacto-grid">
+
+      <!-- Info de contacto -->
+      <div class="contacto-info">
+        <h2>Información de <span style="color:#0cf5ff">contacto</span></h2>
+        <p style="color:#b0bedb;margin:15px 0 30px;">Nuestro equipo está disponible de lunes a sábado de 7am a 6pm para resolver tus dudas.</p>
+
+        <div class="info-item">
+          <span class="info-icon">📍</span>
+          <div>
+            <strong>Dirección</strong>
+            <p>Calle 123 #45-67, Bogotá D.C., Colombia</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📞</span>
+          <div>
+            <strong>Teléfono</strong>
+            <p>+57 (601) 123 4567</p>
+            <p>+57 310 987 6543 (WhatsApp)</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">✉️</span>
+          <div>
+            <strong>Correo electrónico</strong>
+            <p>soporte@tecnology.com.co</p>
+            <p>ventas@tecnology.com.co</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">🕐</span>
+          <div>
+            <strong>Horario de atención</strong>
+            <p>Lunes – Sábado: 7:00 am – 6:00 pm</p>
+            <p>Domingos: Cerrado</p>
+          </div>
+        </div>
+
+        <!-- Redes sociales -->
+        <div class="redes-contacto">
+          <a href="#" class="red-btn red-fb">📘 Facebook</a>
+          <a href="#" class="red-btn red-ig">📸 Instagram</a>
+          <a href="#" class="red-btn red-wa">💬 WhatsApp</a>
+          <a href="#" class="red-btn red-dc">🎮 Discord</a>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="contacto-form-wrap">
+        <h2>Envíanos un <span style="color:#ff3c6f">mensaje</span></h2>
+        <form id="form-contacto" class="contacto-form" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre completo *</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+              <span class="error-msg" id="err-nombre"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico *</label>
+              <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+              <span class="error-msg" id="err-email"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono / WhatsApp</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="+57 300 000 0000">
+          </div>
+
+          <div class="form-group">
+            <label for="asunto">Asunto *</label>
+            <select id="asunto" name="asunto" required>
+              <option value="">— Selecciona un asunto —</option>
+              <option value="soporte">Soporte técnico</option>
+              <option value="garantia">Garantía / Devolución</option>
+              <option value="cotizacion">Cotización</option>
+              <option value="envio">Seguimiento de envío</option>
+              <option value="otro">Otro</option>
+            </select>
+            <span class="error-msg" id="err-asunto"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">Mensaje *</label>
+            <textarea id="mensaje" name="mensaje" rows="5" maxlength="500"
+              placeholder="Cuéntanos en qué podemos ayudarte..." required></textarea>
+            <span class="char-counter" id="char-counter">0 / 500</span>
+            <span class="error-msg" id="err-mensaje"></span>
+          </div>
+
+          <button type="submit" class="btn-submit" id="btn-enviar">
+            <span class="btn-texto">Enviar mensaje 🚀</span>
+            <span class="btn-spinner" style="display:none;">⟳ Enviando...</span>
+          </button>
+
+          <!-- Mensaje de éxito -->
+          <div id="form-exito" style="display:none;" class="form-exito">
+            <p>✅ ¡Mensaje enviado con éxito! Te contactaremos pronto.</p>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section class="mapa-section container">
+    <h2 class="section-title">Encuéntranos <span>aquí</span></h2>
+    <div class="mapa-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254508.38923789745!2d-74.24789!3d4.6482837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9bfd2da6cb29%3A0x239d635520a33914!2sBogot%C3%A1!5e0!3m2!1ses!2sco!4v1700000000000"
+        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade" title="Mapa TECNOLOGY">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content container">
+      <div class="link"><h3>Navegación</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="contactos.html">Contactos</a></li>
+        </ul>
+      </div>
+      <div class="link"><h3>Categorías</h3>
+        <ul>
+          <li><a href="productos.html">Teclados</a></li>
+          <li><a href="productos.html">Monitores</a></li>
+          <li><a href="productos.html">Consolas</a></li>
+          <li><a href="productos.html">Periféricos</a></li>
+        </ul>
+      </div>
+      <div class="link"><h3>Soporte</h3>
+        <ul>
+          <li><a href="servicios.html">Garantía</a></li>
+          <li><a href="servicios.html">Reparaciones</a></li>
+          <li><a href="contactos.html">Ayuda</a></li>
+          <li><a href="contactos.html">PQR</a></li>
+        </ul>
+      </div>
+      <div class="link">
+        <h3>Síguenos</h3>
+        <div class="social-links">
+          <a href="#" class="social-btn">📘 Facebook</a>
+          <a href="#" class="social-btn">📸 Instagram</a>
+          <a href="#" class="social-btn">🎮 Discord</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-copy">© 2025 TECNOLOGY S.A.S — Todos los derechos reservados</p>
+  </footer>
+
+  <!-- SCRIPT INTEGRADO: FONDO ANIMADO Y VALIDACIONES -->
+  <script>
+    // 1. CANVAS ANIMADO NEÓN (Partículas)
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function setCanvasSize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
+
+    const particles = Array.from({ length: 60 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 1.2,
+      vy: (Math.random() - 0.5) * 1.2,
+      radius: Math.random() * 2 + 1,
+      color: Math.random() > 0.5 ? '#0cf5ff' : '#ff3c6f'
+    }));
+
+    function animateBg() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(12, 245, 255, ${1 - dist / 120})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      });
+
+      requestAnimationFrame(animateBg);
+    }
+    animateBg();
+
+    // 2. CONTADOR DE CARACTERES EN TIEMPO REAL
+    const mensajeInput = document.getElementById('mensaje');
+    const charCounter = document.getElementById('char-counter');
+
+    mensajeInput.addEventListener('input', () => {
+      const actual = mensajeInput.value.length;
+      charCounter.textContent = `${actual} / 500`;
+    });
+
+    // 3. VALIDACIÓN Y ENVÍO DEL FORMULARIO
+    const form = document.getElementById('form-contacto');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      let valido = true;
+
+      // Limpiar errores previos
+      document.querySelectorAll('.error-msg').forEach(el => el.textContent = '');
+
+      // Inputs
+      const nombre = document.getElementById('nombre');
+      const email = document.getElementById('email');
+      const asunto = document.getElementById('asunto');
+      const mensaje = document.getElementById('mensaje');
+
+      if (!nombre.value.trim()) {
+        document.getElementById('err-nombre').textContent = 'Ingresa tu nombre';
+        valido = false;
+      }
+      if (!email.value.trim() || !email.value.includes('@')) {
+        document.getElementById('err-email').textContent = 'Email inválido';
+        valido = false;
+      }
+      if (!asunto.value) {
+        document.getElementById('err-asunto').textContent = 'Selecciona un asunto';
+        valido = false;
+      }
+      if (!mensaje.value.trim()) {
+        document.getElementById('err-mensaje').textContent = 'Escribe tu mensaje';
+        valido = false;
+      }
+
+      if (valido) {
+        const btnTexto = document.querySelector('.btn-texto');
+        const btnSpinner = document.querySelector('.btn-spinner');
+        
+        btnTexto.style.display = 'none';
+        btnSpinner.style.display = 'inline-block';
+
+        setTimeout(() => {
+          btnTexto.style.display = 'inline-block';
+          btnSpinner.style.display = 'none';
+          document.getElementById('form-exito').style.display = 'block';
+          form.reset();
+          charCounter.textContent = '0 / 500';
+        }, 1500);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TECNOLOGY S.A.S</title>
+  <link rel="shortcut icon" href="Imagenes/Imagen.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    /* ══════════════════════════════════════════
+       ESTILOS PARA EL FONDO ANIMADO ÉPICO (NEÓN Y CANVAS)
+       ══════════════════════════════════════════ */
+    body {
+      background: #02040a;
+      color: #eef2ff;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Canvas que renderiza las partículas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    /* Vórtices de Luz y Resplandor Central */
+    .cyber-glow {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(12, 245, 255, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(255, 60, 111, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(4, 15, 38, 0.6) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    /* Malla Tecnológica 3D Dinámica */
+    .tech-grid {
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background-image: 
+        linear-gradient(to right, rgba(12, 245, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(12, 245, 255, 0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      transform: perspective(600px) rotateX(65deg);
+      animation: gridMove 8s linear infinite;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    @keyframes gridMove {
+      0% { transform: perspective(600px) rotateX(65deg) translateY(0); }
+      100% { transform: perspective(600px) rotateX(65deg) translateY(60px); }
+    }
+
+    /* Escáner Láser Neón Dual */
+    .scan-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #0cf5ff, #ff3c6f, transparent);
+      box-shadow: 0 0 15px #0cf5ff, 0 0 30px #ff3c6f;
+      z-index: -1;
+      opacity: 0.7;
+      animation: scanAnimation 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes scanAnimation {
+      0% { top: -2%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { top: 102%; opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Elementos visuales del Fondo Tecnológico y Neón -->
+  <div class="cyber-glow"></div>
+  <div class="tech-grid"></div>
+  <div class="scan-line"></div>
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ══════════════ HEADER / NAV ══════════════ -->
+  <header class="header">
+    <div class="menu-container">
+      <a href="TECNOLOGY.html" class="logo">TECNOLOGY</a>
+      <input type="checkbox" id="menu">
+      <label for="menu">
+        <img src="Imagenes/menu.png" class="menu-icono" alt="menú">
+      </label>
+      <nav class="navbar">
+        <ul>
+          <li><a href="productos.html" class="nav-link">PRODUCTOS</a></li>
+          <li><a href="Dashboard.html" class="nav-link">DASHBOARD</a></li>
+          <li><a href="servicios.html" class="nav-link">SERVICIOS</a></li>
+          <li><a href="contactos.html" class="nav-link">CONTACTOS</a></li>
+        </ul>
+      </nav>
+      <!-- Carrito -->
+      <div>
+        <ul>
+          <li class="submenu">
+            <img src="Imagenes/Car2.png" id="img-carrito" alt="carrito">
+            <div id="carrito">
+              <table id="lista-carrito">
+                <thead>
+                  <tr>
+                    <th>Imagen</th><th>Nombre</th><th>Precio</th><th></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <a href="#" id="vaciar-carrito" class="btn-3">vaciar carrito</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Hero -->
+      <div class="header-content container">
+        <div class="header-txt">
+          <h1><span>Bienvenidos a la era Tecnology</span> el siguiente nivel ha llegado</h1>
+          <p>La espera terminó. La tienda oficial de TECNOLOGY ya está online. Gráficas de última
+            generación, teclados mecánicos de respuesta ultra rápida y monitores con tasas de
+            refresco que no sabías que existían.</p>
+          <a href="productos.html" class="btn-1">Ver Productos</a>
+        </div>
+        <div class="header-img">
+          <img src="Imagenes/F1.webp" alt="hero">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════ HIPEROFERTAS ══════════════ -->
+  <section class="breakfasst-container">
+    <h2>Hiperofertas</h2>
+    <p>Horario 7am – 6pm</p>
+    <div class="breakfast-grid">
+      <div class="gamer-card"><img src="Imagenes/Teclado.png" alt=""><h3>Kit Teclado y Ratón</h3></div>
+      <div class="gamer-card"><img src="Imagenes/Mouse.png" alt=""><h3>Mouse Tech GT-10 3200dpi</h3></div>
+      <div class="gamer-card"><img src="Imagenes/DIADEMA.png" alt=""><h3>Auriculares Xtrike GH-509</h3></div>
+      <div class="gamer-card"><img src="Imagenes/Monitor.png" alt=""><h3>Monitor Samsung 34" 165Hz</h3></div>
+      <div class="gamer-card"><img src="Imagenes/Play 5.png" alt=""><h3>PlayStation 5 Digital</h3></div>
+    </div>
+  </section>
+
+  <!-- ══════════════ INFO ══════════════ -->
+  <section class="info">
+    <img class="Torre" src="Imagenes/Torre 1.png" alt="">
+    <div class="info-content container">
+      <div class="info-img"><img src="Imagenes/Portal Remote.png" alt=""></div>
+    </div>
+    <div class="info-txt">
+      <h2>La mejor calidad en los productos</h2>
+      <p>Desde switches mecánicos de alta resistencia hasta sensores ópticos de última generación,
+        seleccionamos solo lo mejor para que tú solo te preocupes por dominar la partida.</p>
+      <a href="servicios.html" class="btn-1">Nuestros Servicios</a>
+    </div>
+  </section>
+
+  <!-- ══════════════ PRODUCTOS DESTACADOS ══════════════ -->
+  <main class="Products container">
+    <h2>PRODUCTOS</h2>
+    <div class="box-container" id="lista-1">
+      <div class="box"><img src="Imagenes/Login 1.png" alt="">
+        <div class="product-txt"><h3>Teclado Gamer Membrana</h3><p>Redragon Shiva White K512 Rgb</p>
+          <p class="Precio">$149.000</p><a href="#" class="Agregar-carrito btn-3" data-id="1">Agregar al carrito</a></div></div>
+      <div class="box"><img src="Imagenes/Logi 2.png" alt="">
+        <div class="product-txt"><h3>Nintendo Switch</h3><p>Oled 64gb Color Blanco/negro</p>
+          <p class="Precio">$1.399.900</p><a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a></div></div>
+      <div class="box"><img src="Imagenes/logi 3.png" alt="">
+        <div class="product-txt"><h3>Mouse Jiexin</h3><p>Vertical Ergonomico Inalambrico</p>
+          <p class="Precio">$24.000</p><a href="#" class="Agregar-carrito btn-3" data-id="3">Agregar al carrito</a></div></div>
+      <div class="box"><img src="Imagenes/logi 4.png" alt="">
+        <div class="product-txt"><h3>Pc Gamer Rgb</h3><p>Ryzen 7 5700g + 32gb + Ssd 512gb</p>
+          <p class="Precio">$3.256.542</p><a href="#" class="Agregar-carrito btn-3" data-id="4">Agregar al carrito</a></div></div>
+      <div class="box"><img src="Imagenes/logi 5.png" alt="">
+        <div class="product-txt"><h3>Cargador Doble PS5</h3><p>Con Pantalla LED y USB</p>
+          <p class="Precio">$64.158</p><a href="#" class="Agregar-carrito btn-3" data-id="5">Agregar al carrito</a></div></div>
+      <div class="box"><img src="Imagenes/Reloj Tactil.png" alt="">
+        <div class="product-txt"><h3>Reloj Hombre</h3><p>Loix Digital Sport Tactil Tecnologico 76-3</p>
+          <p class="Precio">$508.750</p><a href="#" class="Agregar-carrito btn-3" data-id="6">Agregar al carrito</a></div></div>
+      <div class="box"><img src="Imagenes/Cargador Usb.png" alt="">
+        <div class="product-txt"><h3>Cargador Gravastar</h3><p>Alpha65 Robot 65w Usb C Para iPhone Amari</p>
+          <p class="Precio">$391.974</p><a href="#" class="Agregar-carrito btn-3" data-id="7">Agregar al carrito</a></div></div>
+      <div class="box"><img src="Imagenes/Memoria ram.png" alt="">
+        <div class="product-txt"><h3>SSD Samsung Nvme</h3><p>990 Pro de 1 TB 7450 MB/s</p>
+          <p class="Precio">$1.349.900</p><a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a></div></div>
+      <div class="box"><img src="Imagenes/Logi 6.png" alt="">
+        <div class="product-txt"><h3>Hp Omen 27</h3><p>FHD 1920x1080 · 180hz · 1ms</p>
+          <p class="Precio">$769.900</p><a href="#" class="Agregar-carrito btn-3" data-id="9">Agregar al carrito</a></div></div>
+      <div class="btn-2" id="load-more">Cargar Más</div>
+    </div>
+    <div style="text-align:center;margin-top:30px;">
+      <a href="productos.html" class="btn-1">Ver catálogo completo →</a>
+    </div>
+  </main>
+
+  <!-- ══════════════ APP ══════════════ -->
+  <section class="app container">
+    <div class="app-txt">
+      <h2>Descarga nuestra app — descubre Ofertas</h2>
+      <p>Acceso total, donde quieras. Ofertas personalizadas según tu perfil gamer, envíos prioritarios.</p>
+      <div class="descarga">
+        <img src="Imagenes/store1.png" alt="App Store">
+        <img src="Imagenes/store2.png" alt="Google Play">
+      </div>
+    </div>
+    <div class="app-img"><img src="Imagenes/Aplicacion.png" alt="App"></div>
+  </section>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer class="footer">
+    <div class="footer-content container">
+      <div class="link"><h3>Navegación</h3>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="contactos.html">Contactos</a></li>
+        </ul>
+      </div>
+      <div class="link"><h3>Categorías</h3>
+        <ul>
+          <li><a href="productos.html">Teclados</a></li>
+          <li><a href="productos.html">Monitores</a></li>
+          <li><a href="productos.html">Consolas</a></li>
+          <li><a href="productos.html">Periféricos</a></li>
+        </ul>
+      </div>
+      <div class="link"><h3>Soporte</h3>
+        <ul>
+          <li><a href="servicios.html">Garantía</a></li>
+          <li><a href="servicios.html">Reparaciones</a></li>
+          <li><a href="contactos.html">Ayuda</a></li>
+          <li><a href="contactos.html">PQR</a></li>
+        </ul>
+      </div>
+      <div class="link">
+        <h3>Síguenos</h3>
+        <div class="social-links">
+          <a href="#" class="social-btn">📘 Facebook</a>
+          <a href="#" class="social-btn">📸 Instagram</a>
+          <a href="#" class="social-btn">🎮 Discord</a>
+        </div>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 TECNOLOGY S.A.S — Todos los derechos reservados</p>
+  </footer>
+
+  <script src="Script.Js"></script>
+
+  <!-- ══════════════════════════════════════════
+     SCRIPT DEL FONDO INTERACTIVO DE PARTÍCULAS
+     ══════════════════════════════════════════ -->
+  <script>
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const mouse = { x: width / 2, y: height / 2, radius: 150 };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const particleCount = 100;
+
+    class TechParticle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 1.5;
+        this.vy = (Math.random() - 0.5) * 1.5;
+        this.size = Math.random() * 2.5 + 1;
+        this.color = Math.random() > 0.4 ? '#0cf5ff' : '#ff3c6f';
+        this.alpha = Math.random() * 0.7 + 0.3;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius) {
+          const angle = Math.atan2(dy, dx);
+          const force = (mouse.radius - dist) / mouse.radius;
+          this.x -= Math.cos(angle) * force * 3;
+          this.y -= Math.sin(angle) * force * 3;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.alpha;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) particles.push(new TechParticle());
+
+    function renderTechBackground() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = particles[i].color === particles[j].color ? particles[i].color : 'rgba(12, 245, 255, 0.5)';
+            ctx.globalAlpha = (1 - distance / 150) * 0.35;
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+      requestAnimationFrame(renderTechBackground);
+    }
+    renderTechBackground();
+  </script>
+</body>
+</html>
