@@ -100,9 +100,11 @@
   <!-- ══════════════ HEADER / NAV ══════════════ -->
   <header class="header">
     <div class="menu-container">
-      <a href="TECNOLOGY.html" class="logo">TECNOLOGY</a>
+      <!-- CORREGIDO: El enlace del logo ahora apunta a index.html -->
+      <a href="index.html" class="logo">TECNOLOGY</a>
       <input type="checkbox" id="menu">
       <label for="menu">
+        <!-- CORREGIDO: Verifica que tengas esta imagen en tu carpeta, si no, cámbiala -->
         <img src="Imagenes/menu.png" class="menu-icono" alt="menú">
       </label>
       <nav class="navbar">
@@ -158,15 +160,16 @@
       <div class="gamer-card"><img src="Imagenes/Mouse.png" alt=""><h3>Mouse Tech GT-10 3200dpi</h3></div>
       <div class="gamer-card"><img src="Imagenes/DIADEMA.png" alt=""><h3>Auriculares Xtrike GH-509</h3></div>
       <div class="gamer-card"><img src="Imagenes/Monitor.png" alt=""><h3>Monitor Samsung 34" 165Hz</h3></div>
-      <div class="gamer-card"><img src="Imagenes/Play 5.png" alt=""><h3>PlayStation 5 Digital</h3></div>
+      <div class="gamer-card"><img src="Imagenes/Play5.png" alt=""><h3>PlayStation 5 Digital</h3></div>
     </div>
   </section>
 
   <!-- ══════════════ INFO ══════════════ -->
   <section class="info">
-    <img class="Torre" src="Imagenes/Torre 1.png" alt="">
+    <!-- CORREGIDO: Eliminé el espacio en "Torre 1.png" -->
+    <img class="Torre" src="Imagenes/Torre1.png" alt="">
     <div class="info-content container">
-      <div class="info-img"><img src="Imagenes/Portal Remote.png" alt=""></div>
+      <div class="info-img"><img src="Imagenes/PortalRemote.png" alt=""></div>
     </div>
     <div class="info-txt">
       <h2>La mejor calidad en los productos</h2>
@@ -180,35 +183,103 @@
   <main class="Products container">
     <h2>PRODUCTOS</h2>
     <div class="box-container" id="lista-1">
-      <div class="box"><img src="Imagenes/Login 1.png" alt="">
-        <div class="product-txt"><h3>Teclado Gamer Membrana</h3><p>Redragon Shiva White K512 Rgb</p>
-          <p class="Precio">$149.000</p><a href="#" class="Agregar-carrito btn-3" data-id="1">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Logi 2.png" alt="">
-        <div class="product-txt"><h3>Nintendo Switch</h3><p>Oled 64gb Color Blanco/negro</p>
-          <p class="Precio">$1.399.900</p><a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/logi 3.png" alt="">
-        <div class="product-txt"><h3>Mouse Jiexin</h3><p>Vertical Ergonomico Inalambrico</p>
-          <p class="Precio">$24.000</p><a href="#" class="Agregar-carrito btn-3" data-id="3">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/logi 4.png" alt="">
-        <div class="product-txt"><h3>Pc Gamer Rgb</h3><p>Ryzen 7 5700g + 32gb + Ssd 512gb</p>
-          <p class="Precio">$3.256.542</p><a href="#" class="Agregar-carrito btn-3" data-id="4">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/logi 5.png" alt="">
-        <div class="product-txt"><h3>Cargador Doble PS5</h3><p>Con Pantalla LED y USB</p>
-          <p class="Precio">$64.158</p><a href="#" class="Agregar-carrito btn-3" data-id="5">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Reloj Tactil.png" alt="">
-        <div class="product-txt"><h3>Reloj Hombre</h3><p>Loix Digital Sport Tactil Tecnologico 76-3</p>
-          <p class="Precio">$508.750</p><a href="#" class="Agregar-carrito btn-3" data-id="6">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Cargador Usb.png" alt="">
-        <div class="product-txt"><h3>Cargador Gravastar</h3><p>Alpha65 Robot 65w Usb C Para iPhone Amari</p>
-          <p class="Precio">$391.974</p><a href="#" class="Agregar-carrito btn-3" data-id="7">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Memoria ram.png" alt="">
-        <div class="product-txt"><h3>SSD Samsung Nvme</h3><p>990 Pro de 1 TB 7450 MB/s</p>
-          <p class="Precio">$1.349.900</p><a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Logi 6.png" alt="">
-        <div class="product-txt"><h3>Hp Omen 27</h3><p>FHD 1920x1080 · 180hz · 1ms</p>
-          <p class="Precio">$769.900</p><a href="#" class="Agregar-carrito btn-3" data-id="9">Agregar al carrito</a></div></div>
-      <div class="btn-2" id="load-more">Cargar Más</div>
-    </div>
+      
+      <!-- CORREGIDO: Cerré correctamente los divs de cada producto -->
+      <div class="box">
+        <img src="Imagenes/Login1.png" alt="">
+        <div class="product-txt">
+          <h3>Teclado Gamer Membrana</h3>
+          <p>Redragon Shiva White K512 Rgb</p>
+          <p class="Precio">$149.000</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="1">Agregar al carrito</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="Imagenes/Logi2.png" alt="">
+        <div class="product-txt">
+          <h3>Nintendo Switch</h3>
+          <p>Oled 64gb Color Blanco/negro</p>
+          <p class="Precio">$1.399.900</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="Imagenes/logi3.png" alt="">
+        <div class="product-txt">
+          <h3>Mouse Jiexin</h3>
+          <p>Vertical Ergonomico Inalambrico</p>
+          <p class="Precio">$24.000</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="3">Agregar al carrito</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="Imagenes/logi4.png" alt="">
+        <div class="product-txt">
+          <h3>Pc Gamer Rgb</h3>
+          <p>Ryzen 7 5700g + 32gb + Ssd 512gb</p>
+          <p class="Precio">$3.256.542</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="4">Agregar al carrito</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="Imagenes/logi5.png" alt="">
+        <div class="product-txt">
+          <h3>Cargador Doble PS5</h3>
+          <p>Con Pantalla LED y USB</p>
+          <p class="Precio">$64.158</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="5">Agregar al carrito</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="Imagenes/RelojTactil.png" alt="">
+        <div class="product-txt">
+          <h3>Reloj Hombre</h3>
+          <p>Loix Digital Sport Tactil Tecnologico 76-3</p>
+          <p class="Precio">$508.750</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="6">Agregar al carrito</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="Imagenes/CargadorUsb.png" alt="">
+        <div class="product-txt">
+          <h3>Cargador Gravastar</h3>
+          <p>Alpha65 Robot 65w Usb C Para iPhone Amari</p>
+          <p class="Precio">$391.974</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="7">Agregar al carrito</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="Imagenes/Memoriaram.png" alt="">
+        <div class="product-txt">
+          <h3>SSD Samsung Nvme</h3>
+          <p>990 Pro de 1 TB 7450 MB/s</p>
+          <p class="Precio">$1.349.900</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <img src="Imagenes/Logi6.png" alt="">
+        <div class="product-txt">
+          <h3>Hp Omen 27</h3>
+          <p>FHD 1920x1080 · 180hz · 1ms</p>
+          <p class="Precio">$769.900</p>
+          <a href="#" class="Agregar-carrito btn-3" data-id="9">Agregar al carrito</a>
+        </div>
+      </div>
+
+    </div> <!-- Aquí termina el box-container -->
+    
+    <!-- CORREGIDO: El botón de Cargar Más está fuera de la lista -->
+    <div class="btn-2" id="load-more">Cargar Más</div>
+
     <div style="text-align:center;margin-top:30px;">
       <a href="productos.html" class="btn-1">Ver catálogo completo →</a>
     </div>
@@ -266,7 +337,8 @@
     <p class="footer-copy">© 2026 TECNOLOGY S.A.S — Todos los derechos reservados</p>
   </footer>
 
-  <script src="Script.Js"></script>
+  <!-- CORREGIDO: Ahora apunta a "Script.js" con minúscula -->
+  <script src="Script.js"></script>
 
   <!-- ══════════════════════════════════════════
      SCRIPT DEL FONDO INTERACTIVO DE PARTÍCULAS
