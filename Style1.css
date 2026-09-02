@@ -1,16 +1,16 @@
-/* ==========================================
+/* ════════════════════════════════════════════════════════════════
    1. VARIABLES & RESET GENERAL
-   ========================================== */
+   ════════════════════════════════════════════════════════════════ */
 :root {
-  --bg-dark: #04050a;
-  --cyan-neon: #0cf5ff;
-  --magenta-neon: #ff3c6f;
-  --purple-neon: #8a2be2;
-  --card-bg: rgba(16, 20, 38, 0.7);
-  --text-main: #ffffff;
-  --text-muted: #a0aab8;
   --font-title: 'Orbitron', sans-serif;
   --font-body: 'Rajdhani', sans-serif;
+  --bg-dark: #05050f;
+  --bg-card: rgba(15, 15, 30, 0.75);
+  --cyan-neon: #0cf5ff;
+  --pink-neon: #ff3c6f;
+  --purple-neon: #9d4edd;
+  --text-main: #ffffff;
+  --text-muted: #a0a0c0;
 }
 
 * {
@@ -19,14 +19,20 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: var(--font-body);
   background-color: var(--bg-dark);
   color: var(--text-main);
-  min-height: 100vh;
+  font-family: var(--font-body);
   overflow-x: hidden;
   position: relative;
-  font-size: 16px;
+}
+
+ul {
+  list-style: none;
 }
 
 a {
@@ -35,8 +41,9 @@ a {
   transition: all 0.3s ease;
 }
 
-ul {
-  list-style: none;
+img {
+  max-width: 100%;
+  display: block;
 }
 
 .container {
@@ -45,11 +52,9 @@ ul {
   padding: 0 20px;
 }
 
-/* ==========================================
-   2. ELEMENTOS VISUALES DEL FONDO ANIMADO
-   ========================================== */
-
-/* Canvas para las partículas en JavaScript */
+/* ════════════════════════════════════════════════════════════════
+   2. EFECTOS DE FONDO & CYBERPUNK
+   ════════════════════════════════════════════════════════════════ */
 #bg-canvas {
   position: fixed;
   top: 0;
@@ -60,156 +65,141 @@ ul {
   pointer-events: none;
 }
 
-/* Resplandor Neón Ambiental */
 .cyber-glow {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -4;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(12, 245, 255, 0.15) 0%, rgba(255, 60, 111, 0.08) 50%, rgba(0,0,0,0) 70%);
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -2;
   pointer-events: none;
-  background: 
-    radial-gradient(circle at 15% 20%, rgba(12, 245, 255, 0.18) 0%, transparent 45%),
-    radial-gradient(circle at 85% 80%, rgba(255, 60, 111, 0.18) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 60%);
-  animation: auraPulse 10s ease-in-out infinite alternate;
+  filter: blur(50px);
 }
 
-/* Rejilla Cyber 3D Dinámica */
 .tech-grid {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -2;
-  pointer-events: none;
-  background-size: 60px 60px;
+  width: 100%;
+  height: 100%;
   background-image: 
-    linear-gradient(to right, rgba(12, 245, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(12, 245, 255, 0.07) 1px, transparent 1px);
-  mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 90%);
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 90%);
-  animation: gridMovement 15s linear infinite;
+    linear-gradient(rgba(12, 245, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(12, 245, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -1;
+  pointer-events: none;
 }
 
-/* Línea de Escaneo Láser */
 .scan-line {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 3px;
-  z-index: -1;
+  background: rgba(12, 245, 255, 0.3);
+  opacity: 0.6;
+  z-index: 1000;
   pointer-events: none;
-  background: linear-gradient(
-    90deg, 
-    transparent 0%, 
-    rgba(12, 245, 255, 0.2) 20%, 
-    var(--cyan-neon) 50%, 
-    var(--magenta-neon) 80%, 
-    transparent 100%
-  );
-  box-shadow: 
-    0 0 15px var(--cyan-neon),
-    0 0 30px var(--magenta-neon);
-  opacity: 0.8;
-  animation: laserScan 7s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: scan 8s linear infinite;
 }
 
-/* ==========================================
-   3. BOTONES NEÓN & ESTILOS GENERALES
-   ========================================== */
-.btn-1, .btn-2, .btn-3 {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 4px;
-  font-family: var(--font-title);
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
+@keyframes scan {
+  0% { top: -10px; }
+  100% { top: 100vh; }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   3. BOTONES ESTILIZADOS
+   ════════════════════════════════════════════════════════════════ */
 .btn-1 {
+  display: inline-block;
+  padding: 12px 30px;
   background: transparent;
   color: var(--cyan-neon);
   border: 1px solid var(--cyan-neon);
+  font-family: var(--font-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-radius: 4px;
   box-shadow: 0 0 10px rgba(12, 245, 255, 0.2);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-1:hover {
   background: var(--cyan-neon);
-  color: #000;
-  box-shadow: 0 0 20px var(--cyan-neon);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px rgba(12, 245, 255, 0.8);
 }
 
 .btn-2 {
-  background: transparent;
-  color: var(--magenta-neon);
-  border: 1px solid var(--magenta-neon);
-  box-shadow: 0 0 10px rgba(255, 60, 111, 0.2);
+  display: inline-block;
+  padding: 12px 25px;
+  background: rgba(255, 60, 111, 0.1);
+  color: var(--pink-neon);
+  border: 1px solid var(--pink-neon);
+  font-family: var(--font-title);
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .btn-2:hover {
-  background: var(--magenta-neon);
+  background: var(--pink-neon);
   color: #fff;
-  box-shadow: 0 0 20px var(--magenta-neon);
+  box-shadow: 0 0 15px rgba(255, 60, 111, 0.6);
 }
 
 .btn-3 {
-  background: rgba(12, 245, 255, 0.1);
-  color: var(--cyan-neon);
-  border: 1px solid rgba(12, 245, 255, 0.4);
-  padding: 8px 16px;
-  font-size: 0.8rem;
+  display: block;
+  padding: 8px 15px;
+  text-align: center;
+  background: var(--pink-neon);
+  color: #fff;
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-top: 10px;
 }
 
 .btn-3:hover {
-  background: var(--cyan-neon);
-  color: #000;
+  background: #ff1f58;
+  box-shadow: 0 0 10px rgba(255, 60, 111, 0.8);
 }
 
-/* ==========================================
-   4. HEADER Y NAVEGACIÓN
-   ========================================== */
+/* ════════════════════════════════════════════════════════════════
+   4. HEADER & NAVEGACIÓN
+   ════════════════════════════════════════════════════════════════ */
 .header {
-  padding: 20px 0;
-  position: relative;
+  padding-top: 20px;
+  padding-bottom: 60px;
 }
 
 .menu-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  flex-wrap: wrap;
 }
 
 .logo {
   font-family: var(--font-title);
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 900;
   color: #fff;
+  letter-spacing: 3px;
   text-shadow: 0 0 10px var(--cyan-neon);
 }
 
-#menu {
-  display: none;
-}
-
-.menu-icono {
-  width: 30px;
-  cursor: pointer;
-  display: none;
-}
+#menu { display: none; }
+.menu-icono { width: 30px; cursor: pointer; display: none; }
 
 .navbar ul {
   display: flex;
@@ -218,8 +208,8 @@ ul {
 
 .nav-link {
   font-family: var(--font-title);
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
   color: var(--text-muted);
 }
 
@@ -228,47 +218,54 @@ ul {
   text-shadow: 0 0 8px var(--cyan-neon);
 }
 
-/* Carrito Dropdown */
+/* Submenús Carrito / Medios de Pago */
+.header-actions ul {
+  display: flex;
+  gap: 20px;
+}
+
 .submenu {
   position: relative;
 }
 
-#img-carrito {
+.submenu img {
   width: 35px;
   cursor: pointer;
   filter: drop-shadow(0 0 5px var(--cyan-neon));
 }
 
-#carrito {
+#carrito, #Medios-de-Pago {
   position: absolute;
   right: 0;
   top: 120%;
-  background: rgba(10, 12, 24, 0.95);
+  background: rgba(10, 10, 25, 0.95);
   border: 1px solid var(--cyan-neon);
-  box-shadow: 0 0 15px rgba(12, 245, 255, 0.3);
-  padding: 15px;
   border-radius: 8px;
-  backdrop-filter: blur(10px);
+  padding: 15px;
+  min-width: 280px;
   display: none;
   z-index: 100;
-  min-width: 280px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
 }
 
-.submenu:hover #carrito {
+.submenu:hover #carrito,
+.submenu:hover #Medios-de-Pago {
   display: block;
 }
 
 #lista-carrito {
   width: 100%;
-  margin-bottom: 15px;
   border-collapse: collapse;
+  margin-bottom: 10px;
+  color: #fff;
 }
 
-#lista-carrito th {
-  color: var(--cyan-neon);
-  border-bottom: 1px solid rgba(12, 245, 255, 0.2);
-  padding-bottom: 5px;
-  font-size: 0.8rem;
+#lista-carrito th, #lista-carrito td {
+  padding: 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 /* Hero Section */
@@ -276,8 +273,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 50px;
-  width: 100%;
+  margin-top: 60px;
   gap: 40px;
 }
 
@@ -290,22 +286,20 @@ ul {
   font-size: 2.8rem;
   line-height: 1.2;
   margin-bottom: 20px;
-  text-transform: uppercase;
 }
 
 .header-txt h1 span {
   display: block;
   color: var(--cyan-neon);
   text-shadow: 0 0 12px var(--cyan-neon);
-  font-size: 1.2rem;
-  margin-bottom: 5px;
+  font-size: 1.5rem;
 }
 
 .header-txt p {
+  font-size: 1.2rem;
   color: var(--text-muted);
-  font-size: 1.1rem;
-  line-height: 1.6;
   margin-bottom: 30px;
+  line-height: 1.6;
 }
 
 .header-img {
@@ -315,31 +309,29 @@ ul {
 
 .header-img img {
   max-width: 100%;
-  height: auto;
-  filter: drop-shadow(0 0 20px rgba(12, 245, 255, 0.4));
-  animation: floatImg 4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 20px rgba(12, 245, 255, 0.3));
 }
 
-/* ==========================================
-   5. SECCIÓN HIPEROFERTAS
-   ========================================== */
+/* ════════════════════════════════════════════════════════════════
+   5. HIPEROFERTAS
+   ════════════════════════════════════════════════════════════════ */
 .breakfasst-container {
-  padding: 80px 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 40px auto;
+  padding: 0 20px;
   text-align: center;
 }
 
 .breakfasst-container h2 {
   font-family: var(--font-title);
   font-size: 2.2rem;
-  color: var(--magenta-neon);
-  text-shadow: 0 0 10px var(--magenta-neon);
+  color: var(--pink-neon);
+  text-shadow: 0 0 10px var(--pink-neon);
 }
 
 .breakfasst-container p {
   color: var(--text-muted);
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .breakfast-grid {
@@ -349,61 +341,59 @@ ul {
 }
 
 .gamer-card {
-  background: var(--card-bg);
-  border: 1px solid rgba(255, 60, 111, 0.2);
-  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid rgba(12, 245, 255, 0.2);
   padding: 20px;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
+  border-radius: 8px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .gamer-card:hover {
-  border-color: var(--magenta-neon);
-  box-shadow: 0 0 15px rgba(255, 60, 111, 0.4);
   transform: translateY(-5px);
+  border-color: var(--cyan-neon);
+  box-shadow: 0 5px 15px rgba(12, 245, 255, 0.2);
 }
 
 .gamer-card img {
-  width: 100%;
-  height: 140px;
+  height: 120px;
+  margin: 0 auto 15px auto;
   object-fit: contain;
-  margin-bottom: 15px;
 }
 
 .gamer-card h3 {
   font-size: 1.1rem;
+  font-family: var(--font-body);
   font-weight: 600;
 }
 
-/* ==========================================
-   6. SECCIÓN INFO
-   ========================================== */
+/* ════════════════════════════════════════════════════════════════
+   6. INFO SECTION
+   ════════════════════════════════════════════════════════════════ */
 .info {
-  position: relative;
-  padding: 80px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 40px 20px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 60, 111, 0.2);
+  position: relative;
   gap: 40px;
 }
 
 .Torre {
   position: absolute;
-  left: -50px;
-  opacity: 0.15;
+  left: -20px;
+  top: -30px;
+  width: 100px;
+  opacity: 0.3;
   pointer-events: none;
-  max-width: 300px;
 }
 
 .info-content {
   flex: 1;
-}
-
-.info-img img {
-  width: 100%;
-  border-radius: 10px;
-  filter: drop-shadow(0 0 15px rgba(12, 245, 255, 0.3));
 }
 
 .info-txt {
@@ -413,114 +403,124 @@ ul {
 .info-txt h2 {
   font-family: var(--font-title);
   font-size: 2rem;
-  margin-bottom: 20px;
-  color: var(--cyan-neon);
+  margin-bottom: 15px;
+  color: #fff;
 }
 
 .info-txt p {
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 30px;
   font-size: 1.1rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
 }
 
-/* ==========================================
-   7. PRODUCTOS (BOX CONTAINER)
-   ========================================== */
-.Products {
-  padding: 80px 20px;
-}
-
+/* ════════════════════════════════════════════════════════════════
+   7. CATÁLOGO DE PRODUCTOS
+   ════════════════════════════════════════════════════════════════ */
 .Products h2 {
   font-family: var(--font-title);
   font-size: 2.2rem;
   text-align: center;
   margin-bottom: 40px;
+  letter-spacing: 2px;
   color: var(--cyan-neon);
-  text-shadow: 0 0 10px var(--cyan-neon);
 }
 
 .box-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 25px;
 }
 
 .box {
-  background: var(--card-bg);
-  border: 1px solid rgba(12, 245, 255, 0.15);
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
 }
 
 .box:hover {
-  border-color: var(--cyan-neon);
-  box-shadow: 0 0 20px rgba(12, 245, 255, 0.3);
+  border-color: var(--pink-neon);
+  box-shadow: 0 0 20px rgba(255, 60, 111, 0.25);
   transform: translateY(-5px);
 }
 
 .box img {
-  width: 100%;
   height: 180px;
   object-fit: contain;
-  margin-bottom: 15px;
+  margin: 0 auto 15px auto;
 }
 
 .product-txt h3 {
-  font-size: 1.2rem;
-  margin-bottom: 8px;
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  margin-bottom: 5px;
 }
 
 .product-txt p {
   color: var(--text-muted);
   font-size: 0.95rem;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .product-txt .Precio {
-  font-family: var(--font-title);
-  font-size: 1.3rem;
-  color: var(--cyan-neon);
+  font-size: 1.4rem;
   font-weight: 700;
+  color: var(--cyan-neon);
   margin-bottom: 15px;
 }
 
 #load-more {
   grid-column: 1 / -1;
-  justify-self: center;
-  margin-top: 20px;
+  margin: 20px auto 0 auto;
 }
 
-/* ==========================================
-   8. SECCIÓN SECCIÓN APP
-   ========================================== */
+/* ════════════════════════════════════════════════════════════════
+   8. PASARELA DE PAGO DIRECTA (ESTILOS FORMULARIO)
+   ════════════════════════════════════════════════════════════════ */
+.checkout-section {
+  backdrop-filter: blur(10px);
+}
+
+#payment-form input,
+#payment-form select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#payment-form input:focus,
+#payment-form select:focus {
+  border-color: var(--cyan-neon) !important;
+  box-shadow: 0 0 10px rgba(12, 245, 255, 0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   9. APP SECTION & FOOTER
+   ════════════════════════════════════════════════════════════════ */
 .app {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 80px 20px;
+  margin: 100px auto 60px auto;
   gap: 40px;
-  background: rgba(16, 20, 38, 0.4);
-  border-radius: 15px;
-  border: 1px solid rgba(12, 245, 255, 0.1);
-  margin-bottom: 80px;
 }
 
 .app-txt h2 {
   font-family: var(--font-title);
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
 }
 
 .app-txt p {
   color: var(--text-muted);
-  margin-bottom: 30px;
   font-size: 1.1rem;
+  margin-bottom: 25px;
 }
 
 .descarga {
@@ -531,43 +531,36 @@ ul {
 .descarga img {
   height: 45px;
   cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.descarga img:hover {
-  transform: scale(1.05);
 }
 
 .app-img img {
-  max-width: 100%;
-  filter: drop-shadow(0 0 15px rgba(255, 60, 111, 0.3));
+  max-width: 350px;
+  filter: drop-shadow(0 0 15px var(--cyan-neon));
 }
 
-/* ==========================================
-   9. FOOTER
-   ========================================== */
 .footer {
-  background: rgba(4, 5, 10, 0.95);
+  background: rgba(5, 5, 12, 0.95);
   border-top: 1px solid rgba(12, 245, 255, 0.2);
   padding: 60px 0 20px 0;
+  margin-top: 80px;
 }
 
 .footer-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
+  gap: 30px;
   margin-bottom: 40px;
 }
 
 .link h3 {
   font-family: var(--font-title);
-  font-size: 1.1rem;
   color: var(--cyan-neon);
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
 }
 
 .link ul li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .link ul li a {
@@ -575,8 +568,7 @@ ul {
 }
 
 .link ul li a:hover {
-  color: var(--magenta-neon);
-  padding-left: 5px;
+  color: #fff;
 }
 
 .social-links {
@@ -590,7 +582,7 @@ ul {
 }
 
 .social-btn:hover {
-  color: var(--cyan-neon);
+  color: var(--pink-neon);
 }
 
 .footer-copy {
@@ -601,65 +593,47 @@ ul {
   padding-top: 20px;
 }
 
-/* ==========================================
-   10. ANIMACIONES KEYFRAMES
-   ========================================== */
-@keyframes gridMovement {
-  0% { background-position: 0 0; }
-  100% { background-position: 60px 60px; }
-}
-
-@keyframes laserScan {
-  0% { top: -5%; opacity: 0; }
-  10% { opacity: 0.9; }
-  90% { opacity: 0.9; }
-  100% { top: 105%; opacity: 0; }
-}
-
-@keyframes auraPulse {
-  0% { transform: scale(1); filter: hue-rotate(0deg); }
-  50% { transform: scale(1.08); filter: hue-rotate(15deg); }
-  100% { transform: scale(1); filter: hue-rotate(0deg); }
-}
-
-@keyframes floatImg {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-15px); }
-}
-
-/* ==========================================
-   11. MEDIA QUERIES (DISEÑO ADAPTATIVO)
-   ========================================== */
-@media (max-width: 868px) {
+/* ════════════════════════════════════════════════════════════════
+   10. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
   .menu-icono {
     display: block;
   }
 
   .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(5, 5, 15, 0.98);
+    border-bottom: 1px solid var(--cyan-neon);
     display: none;
-    width: 100%;
-    margin-top: 20px;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
   }
 
   #menu:checked ~ .navbar {
     display: block;
   }
 
-  .navbar ul {
-    flex-direction: column;
-    gap: 15px;
-    background: rgba(10, 12, 24, 0.95);
-    padding: 20px;
-    border: 1px solid var(--cyan-neon);
-    border-radius: 8px;
-  }
-
-  .header-content, .info, .app {
+  .header-content,
+  .info,
+  .app {
     flex-direction: column;
     text-align: center;
   }
 
-  .descarga {
-    justify-content: center;
+  .header-txt h1 {
+    font-size: 2rem;
   }
+
+  #payment-form div {
+    flex-direction: column;
+  }
+}
 }
