@@ -95,6 +95,35 @@
       box-shadow: 0 0 20px #0cf5ff;
     }
 
+    /* Estilo neón para el botón de Factura Electrónica */
+    .btn-factura-neon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 0;
+      background: rgba(12, 245, 255, 0.05);
+      color: #0cf5ff;
+      border: 1px solid #0cf5ff;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(12, 245, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .btn-factura-neon:hover {
+      background: #0cf5ff;
+      color: #050510;
+      box-shadow: 0 0 20px #0cf5ff, 0 0 30px rgba(12, 245, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
     #vaciar-carrito {
       display: block;
       width: 100%;
@@ -165,17 +194,6 @@
               <div class="carrito-total-container">
                 <span>Total:</span>
                 <span id="total-carrito">$0</span>
-              </div>
-
-              <!-- Integración del Selector de Medio de Pago -->
-              <div class="pago-opciones-carrito">
-                <label for="metodo-pago-carrito">Medio de Pago:</label>
-                <select id="metodo-pago-carrito">
-                  <option value="nequi">📱 Nequi</option>
-                  <option value="daviplata">📱 Daviplata</option>
-                  <option value="pse">🏦 PSE (Débito Bancario)</option>
-                  <option value="transf">🏛️ Transferencia Bancaria Directa</option>
-                </select>
               </div>
 
               <!-- Integración de los Botones -->
@@ -271,13 +289,14 @@
 
   <!-- ══════════════ FORMULARIO DE PAGO DIRECTO ══════════════ -->
   <section class="checkout-section container" id="checkout-payment" style="margin: 50px auto; padding: 20px; background: rgba(10, 10, 25, 0.85); border: 1px solid #0cf5ff; border-radius: 12px; box-shadow: 0 0 15px rgba(12, 245, 255, 0.3);">
-    <h2 style="text-align:center; color:#0cf5ff; font-family:'Orbitron', sans-serif; margin-bottom: 20px;">Medios de Pago Directo</h2>
+  <h2 style="text-align:center; color:#0cf5ff; font-family:'Orbitron', sans-serif; margin-bottom: 20px;">Formulario de Pago Directo</h2>
     
     <form id="payment-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto;">
       
       <!-- Datos del Cliente -->
       <div style="display: flex; gap: 10px;">
-        <input type="text" id="nombre-cliente" placeholder="Nombre Completo" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
+        <input type="text" id="nombre-cliente" placeholder="Cliente" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
+        <input type="text" id="nombre-cliente" placeholder="Nombre del Producto" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
         <input type="email" id="email-cliente" placeholder="Correo Electrónico" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
       </div>
 
@@ -288,6 +307,9 @@
 
       <div style="display: flex; gap: 10px;">
         <input type="text" id="Nit" placeholder="Nit / Empresa" style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
+        <input type="text" id="Nit" placeholder="+ IVA" style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
+        <input type="text" id="Nit" placeholder="Valor a Pagar" style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
+      </div>
       </div>
 
       <!-- Selección del Medio de Pago -->
@@ -316,6 +338,10 @@
         <label for="comprobante" style="color: #fff;">Adjuntar Comprobante o Recibo de Transferencia:</label>
         <input type="file" id="comprobante" accept="image/*,.pdf" style="padding: 10px; background: #050510; border: 1px dashed #0cf5ff; color: #fff; border-radius: 5px;">
       </div>
+      <!-- BOTÓN FACTURA ELECTRÓNICA AGREGADO -->
+                <button id="btn-factura-electronica" class="btn-factura-neon" type="button">
+                  🧾 Factura Electrónica
+                </button>
 
       <button type="submit" class="btn-1" style="cursor: pointer; margin-top: 10px; width: 100%;">Confirmar y Finalizar Pago</button>
     </form>
@@ -390,7 +416,7 @@
   <script src="Script.Js"></script>
 
   <!-- ══════════════════════════════════════════
-      LÓGICA DEL CARRITO COMPLETO
+      LÓGICA DEL CARRITO COMPLETO Y FACTURA
       ══════════════════════════════════════════ -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -400,6 +426,7 @@
       const listaProductos = document.getElementById('lista-1');
       const selectMetodoCarrito = document.getElementById('metodo-pago-carrito');
       const selectMetodoForm = document.getElementById('metodo-pago');
+      const btnFactura = document.getElementById('btn-factura-electronica');
 
       let articulosCarrito = [];
 
@@ -410,6 +437,9 @@
         if (contenedorCarrito) contenedorCarrito.addEventListener('click', eliminarProducto);
         if (vaciarCarritoBtn) vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
         
+        // Listener para la Factura Electrónica
+        if (btnFactura) btnFactura.addEventListener('click', procesarFacturaElectronica);
+
         // Sincronizar selección del carrito con la pasarela inferior
         if (selectMetodoCarrito && selectMetodoForm) {
           selectMetodoCarrito.addEventListener('change', (e) => {
@@ -502,6 +532,37 @@
         while (contenedorCarrito.firstChild) {
           contenedorCarrito.removeChild(contenedorCarrito.firstChild);
         }
+      }
+
+      // Función para validar y solicitar la Factura Electrónica
+      function procesarFacturaElectronica() {
+        if (articulosCarrito.length === 0) {
+          alert('⚠️ Agrega al menos un producto al carrito para solicitar tu factura.');
+          return;
+        }
+
+        const nombre = document.getElementById('nombre-cliente')?.value;
+        const email = document.getElementById('email-cliente')?.value;
+        const documento = document.getElementById('documento-cliente')?.value;
+        const nit = document.getElementById('Nit')?.value;
+
+        if (!nombre || !email || (!documento && !nit)) {
+          alert('⚠️ Por favor completa tus datos de facturación (Nombre, Correo y Cédula o NIT) en el formulario de pago.');
+          window.location.href = '#checkout-payment';
+          return;
+        }
+
+        const datosFactura = {
+          cliente: nombre,
+          email: email,
+          identificacion: nit || documento,
+          tipoIdentificacion: nit ? 'NIT' : 'CC',
+          articulos: articulosCarrito,
+          fecha: new Date().toISOString()
+        };
+
+        console.log('Solicitud de Factura Electrónica:', datosFactura);
+        alert(`⚡ Factura Electrónica registrada para ${nombre}.\nSe enviará el documento XML/PDF al correo: ${email}`);
       }
 
       renderizarCarrito();
