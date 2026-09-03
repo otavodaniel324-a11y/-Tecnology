@@ -8,6 +8,117 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="Style1.css">
+  <style>
+    /* Estilos del Carrito Integrado según el diseño de la imagen */
+    #carrito {
+      background: #090a14;
+      border: 1px solid #0cf5ff;
+      border-radius: 12px;
+      padding: 20px;
+      width: 340px;
+      box-shadow: 0 0 15px rgba(12, 245, 255, 0.2);
+    }
+
+    .carrito-total-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(12, 245, 255, 0.2);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: bold;
+    }
+
+    #total-carrito {
+      color: #0cf5ff;
+      font-size: 1.2rem;
+      text-shadow: 0 0 5px #0cf5ff;
+    }
+
+    .pago-opciones-carrito {
+      margin: 15px 0 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+    }
+
+    .pago-opciones-carrito label {
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .pago-opciones-carrito select {
+      width: 100%;
+      padding: 10px;
+      background: #050510;
+      border: 1px solid #0cf5ff;
+      color: #0cf5ff;
+      border-radius: 6px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: bold;
+      outline: none;
+    }
+
+    .carrito-acciones {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-pagar-neon {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      background: #0cf5ff;
+      color: #000;
+      box-shadow: 0 0 10px #0cf5ff;
+      transition: all 0.3s ease;
+    }
+
+    .btn-pagar-neon:hover {
+      box-shadow: 0 0 20px #0cf5ff;
+    }
+
+    #vaciar-carrito {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      background: #ff3c6f;
+      color: #fff;
+      box-shadow: 0 0 10px #ff3c6f;
+      transition: all 0.3s ease;
+    }
+
+    #vaciar-carrito:hover {
+      box-shadow: 0 0 20px #ff3c6f;
+    }
+  </style>
 </head>
 
 <body>
@@ -35,10 +146,9 @@
         </ul>
       </nav>
 
-      <!-- Carrito & Navegación Auxiliar -->
+      <!-- Carrito Integrado -->
       <div class="header-actions">
         <ul>
-          <!-- Elemento Carrito -->
           <li class="submenu">
             <img src="Imagenes/Car2.png" id="img-carrito" alt="carrito">
             <div id="carrito">
@@ -50,17 +160,29 @@
                 </thead>
                 <tbody></tbody>
               </table>
-              <a href="#" id="vaciar-carrito" class="btn-3">Vaciar carrito</a>
-            </div>
-          </li>
-          <!-- Submenu Directo de Medios de Pago -->
-          <li class="submenu">
-            <img src="Imagenes/Medio de pago.png" id="img-pago" alt="medios de pago">
-            <div id="Medios-de-Pago">
-              <p style="color:#fff; padding:10px; text-align:center;">
-                Aceptamos PSE, Nequi, Daviplata y Cuentas Bancarias Directas.
-              </p>
-              <a href="#checkout-payment" class="btn-3">Ir a Pagar</a>
+
+              <!-- Total del Carrito -->
+              <div class="carrito-total-container">
+                <span>Total:</span>
+                <span id="total-carrito">$0</span>
+              </div>
+
+              <!-- Integración del Selector de Medio de Pago -->
+              <div class="pago-opciones-carrito">
+                <label for="metodo-pago-carrito">Medio de Pago:</label>
+                <select id="metodo-pago-carrito">
+                  <option value="nequi">📱 Nequi</option>
+                  <option value="daviplata">📱 Daviplata</option>
+                  <option value="pse">🏦 PSE (Débito Bancario)</option>
+                  <option value="transf">🏛️ Transferencia Bancaria Directa</option>
+                </select>
+              </div>
+
+              <!-- Integración de los Botones -->
+              <div class="carrito-acciones">
+                <a href="#checkout-payment" class="btn-pagar-neon">Ir a Pagar</a>
+                <a href="#" id="vaciar-carrito">Vaciar Carrito</a>
+              </div>
             </div>
           </li>
         </ul>
@@ -149,7 +271,7 @@
 
   <!-- ══════════════ FORMULARIO DE PAGO DIRECTO ══════════════ -->
   <section class="checkout-section container" id="checkout-payment" style="margin: 50px auto; padding: 20px; background: rgba(10, 10, 25, 0.85); border: 1px solid #0cf5ff; border-radius: 12px; box-shadow: 0 0 15px rgba(12, 245, 255, 0.3);">
-    <h2 style="text-align:center; color:#0cf5ff; font-family:'Orbitron', sans-serif; margin-bottom: 20px;">Pasarela de Pago Directa</h2>
+    <h2 style="text-align:center; color:#0cf5ff; font-family:'Orbitron', sans-serif; margin-bottom: 20px;">Medios de Pago Directo</h2>
     
     <form id="payment-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto;">
       
@@ -165,7 +287,7 @@
       </div>
 
       <div style="display: flex; gap: 10px;">
-        <input type="Nit" id="Nit" placeholder="Nit / Empresa" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
+        <input type="text" id="Nit" placeholder="Nit / Empresa" style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
       </div>
 
       <!-- Selección del Medio de Pago -->
@@ -266,6 +388,125 @@
   </footer>
 
   <script src="Script.Js"></script>
+
+  <!-- ══════════════════════════════════════════
+      LÓGICA DEL CARRITO COMPLETO
+      ══════════════════════════════════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const contenedorCarrito = document.querySelector('#lista-carrito tbody');
+      const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+      const totalCarritoElem = document.getElementById('total-carrito');
+      const listaProductos = document.getElementById('lista-1');
+      const selectMetodoCarrito = document.getElementById('metodo-pago-carrito');
+      const selectMetodoForm = document.getElementById('metodo-pago');
+
+      let articulosCarrito = [];
+
+      cargarEventListeners();
+
+      function cargarEventListeners() {
+        if (listaProductos) listaProductos.addEventListener('click', agregarProducto);
+        if (contenedorCarrito) contenedorCarrito.addEventListener('click', eliminarProducto);
+        if (vaciarCarritoBtn) vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
+        
+        // Sincronizar selección del carrito con la pasarela inferior
+        if (selectMetodoCarrito && selectMetodoForm) {
+          selectMetodoCarrito.addEventListener('change', (e) => {
+            selectMetodoForm.value = e.target.value;
+            togglePaymentFields();
+          });
+        }
+      }
+
+      function agregarProducto(e) {
+        e.preventDefault();
+        if (e.target.classList.contains('Agregar-carrito')) {
+          const producto = e.target.closest('.box');
+          const infoProducto = {
+            imagen: producto.querySelector('img').src,
+            titulo: producto.querySelector('h3').textContent,
+            precioText: producto.querySelector('.Precio').textContent,
+            precioNum: parseInt(producto.querySelector('.Precio').textContent.replace(/[^0-9]/g, '')),
+            id: e.target.getAttribute('data-id'),
+            cantidad: 1
+          };
+
+          const existe = articulosCarrito.some(prod => prod.id === infoProducto.id);
+          if (existe) {
+            articulosCarrito = articulosCarrito.map(prod => {
+              if (prod.id === infoProducto.id) {
+                prod.cantidad++;
+                return prod;
+              }
+              return prod;
+            });
+          } else {
+            articulosCarrito = [...articulosCarrito, infoProducto];
+          }
+
+          renderizarCarrito();
+        }
+      }
+
+      function eliminarProducto(e) {
+        if (e.target.classList.contains('borrar-producto')) {
+          e.preventDefault();
+          const id = e.target.getAttribute('data-id');
+          articulosCarrito = articulosCarrito.filter(prod => prod.id !== id);
+          renderizarCarrito();
+        }
+      }
+
+      function vaciarCarrito(e) {
+        if (e) e.preventDefault();
+        articulosCarrito = [];
+        renderizarCarrito();
+      }
+
+      function renderizarCarrito() {
+        limpiarHTML();
+
+        if (articulosCarrito.length === 0) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td colspan="4" style="text-align: center; color: #6272a4; padding: 20px 0; font-family: 'Rajdhani', sans-serif;">
+              🛒 El carrito está vacío
+            </td>
+          `;
+          contenedorCarrito.appendChild(row);
+          totalCarritoElem.textContent = '$0';
+          return;
+        }
+
+        articulosCarrito.forEach(prod => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><img src="${prod.imagen}" width="35" style="border-radius:4px;"></td>
+            <td style="color:#fff; font-size:0.85rem; font-family:'Rajdhani', sans-serif;">${prod.titulo} (x${prod.cantidad})</td>
+            <td style="color:#0cf5ff; font-weight:bold; font-size:0.85rem; font-family:'Orbitron', sans-serif;">${prod.precioText}</td>
+            <td><a href="#" class="borrar-producto" data-id="${prod.id}" style="color:#ff3c6f; font-weight:bold; text-decoration:none;">X</a></td>
+          `;
+          contenedorCarrito.appendChild(row);
+        });
+
+        calcularTotal();
+      }
+
+      function calcularTotal() {
+        const total = articulosCarrito.reduce((acc, prod) => acc + (prod.precioNum * prod.cantidad), 0);
+        totalCarritoElem.textContent = `$${total.toLocaleString('es-CO')}`;
+      }
+
+      function limpiarHTML() {
+        while (contenedorCarrito.firstChild) {
+          contenedorCarrito.removeChild(contenedorCarrito.firstChild);
+        }
+      }
+
+      renderizarCarrito();
+    });
+  </script>
 
   <!-- ══════════════════════════════════════════
       SCRIPT DEL FONDO INTERACTIVO DE PARTÍCULAS
