@@ -11,6 +11,17 @@ body {
   scroll-behavior: smooth;
 }
 
+/* FONDO DE PARTÍCULAS: fijo detrás de la página (no ocupa espacio) */
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* GAMER NEON SCROLLBAR */
 ::-webkit-scrollbar {
   width: 8px;
@@ -134,13 +145,45 @@ body {
   border: 1px solid #0cf5ff;
   border-radius: 12px;
   padding: 15px;
-  display: none;
   z-index: 999;
   box-shadow: 0 0 20px rgba(12, 245, 255, 0.25);
+
+  /* Cerrado: se queda visible 1.5 s después de quitar el mouse y luego se desvanece */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease 1.5s,
+              transform 0.3s ease 1.5s,
+              visibility 0s linear 1.8s;
 }
 
-.submenu:hover #carrito {
-  display: block;
+/* Puente invisible: cubre el hueco entre el icono y el panel
+   para que el carrito no se cierre al bajar el mouse hacia él */
+#carrito::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+}
+
+/* Abierto: al pasar el mouse, o al hacer clic (clase .abierto del script) */
+.submenu:hover #carrito,
+.submenu.abierto #carrito {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+}
+
+/* Icono del carrito: reacciona al clic */
+#img-carrito:hover {
+  transform: scale(1.12);
+}
+
+#img-carrito:active {
+  transform: scale(0.95);
 }
 
 #lista-carrito {
@@ -219,26 +262,47 @@ body {
 }
 
 .buscador-wrap {
+  position: relative;
   width: 100%;
 }
 
+/* Buscador con borde degradado rosa → cian que se expande al escribir */
 .buscador-input {
   width: 100%;
-  max-width: 380px;
-  padding: 10px 16px;
-  background: rgba(15, 17, 26, 0.8);
-  border: 1px solid rgba(255, 60, 111, 0.4);
-  border-radius: 8px;
+  max-width: 440px;
+  padding: 14px 22px;
+  background:
+    linear-gradient(#0b0e17, #0b0e17) padding-box,
+    linear-gradient(90deg, #ff3c6f, #0cf5ff) border-box;
+  border: 2px solid transparent;
+  border-radius: 14px;
   color: #fff;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   outline: none;
-  transition: all 0.3s ease;
+  box-shadow: 0 0 0 rgba(12, 245, 255, 0);
+  transition: max-width 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.buscador-input::placeholder {
+  color: #5a6a8a;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.buscador-input:hover {
+  box-shadow: 0 0 14px rgba(255, 60, 111, 0.35);
 }
 
 .buscador-input:focus {
-  border-color: #ff3c6f;
-  box-shadow: 0 0 12px rgba(255, 60, 111, 0.5);
+  max-width: 620px;
+  box-shadow: 0 0 22px rgba(12, 245, 255, 0.45), 0 0 8px rgba(255, 60, 111, 0.35);
+}
+
+.buscador-input:focus::placeholder {
+  color: #2c3a58;
 }
 
 /* BOTONES GLOBALES */
@@ -260,24 +324,126 @@ body {
   box-shadow: 0 0 20px #0cf5ff;
 }
 
-.btn-3 {
+/* Base común de los botones de compra */
+.btn-2,
+.btn-3,
+.btn-4 {
+  position: relative;
   display: inline-block;
-  background: linear-gradient(90deg, #ff3c6f, #ff6a47);
-  padding: 8px 16px;
+  overflow: hidden;
+  padding: 10px 20px;
+  border: 2px solid transparent;
   border-radius: 30px;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 0.8rem;
-  transition: 0.2s;
-  border: none;
-  cursor: pointer;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
   text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+/* Brillo que cruza el botón al pasar el mouse */
+.btn-2::after,
+.btn-3::after,
+.btn-4::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.btn-2:hover::after,
+.btn-3:hover::after,
+.btn-4:hover::after {
+  left: 130%;
+}
+
+.btn-2:active,
+.btn-3:active,
+.btn-4:active {
+  transform: scale(0.96);
+}
+
+.btn-2:focus-visible,
+.btn-3:focus-visible,
+.btn-4:focus-visible {
+  outline: 2px solid #0cf5ff;
+  outline-offset: 3px;
+}
+
+/* Agregar al carrito (rosa) */
+.btn-3 {
+  background: linear-gradient(90deg, #ff3c6f, #ff6a47);
+  color: #fff;
+}
+
+.btn-3::before {
+  content: "🛒 ";
 }
 
 .btn-3:hover {
-  transform: scale(0.98);
-  box-shadow: 0 0 12px #ff3c6f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 60, 111, 0.55);
+}
+
+/* Comprar ahora en las tarjetas (cian, contorno) */
+.btn-4 {
+  background: rgba(12, 245, 255, 0.06);
+  border-color: #0cf5ff;
+  color: #0cf5ff;
+}
+
+.btn-4::before {
+  content: "⚡ ";
+}
+
+.btn-4:hover {
+  background: linear-gradient(90deg, #0cf5ff, #3d8bff);
+  color: #02040a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(12, 245, 255, 0.55);
+}
+
+/* Comprar ahora en el carrito (cian, relleno) */
+.btn-2 {
+  background: linear-gradient(90deg, #0cf5ff, #3d8bff);
+  color: #02040a;
+}
+
+.btn-2:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(12, 245, 255, 0.55);
+}
+
+/* Botones dentro del carrito desplegable */
+#carrito .btn-2,
+#carrito .btn-3 {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+#carrito .btn-3 {
+  margin-right: 6px;
+}
+
+#carrito .btn-3::before {
+  content: "";
+}
+
+/* Botones dentro de las tarjetas: uno debajo del otro, mismo ancho */
+.product-txt .btn-3,
+.product-txt .btn-4 {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
 }
 
 /* PRODUCTOS MAIN GRID */
@@ -320,6 +486,98 @@ body {
   margin-bottom: 15px;
 }
 
+/* ═══════════════════════════════════════════
+   MOVIMIENTO DE LAS IMÁGENES
+   · Flotan suavemente
+   · En las tarjetas con varias imágenes, cambian solas
+     (carrusel: cada una entra girando y sale por el otro lado)
+   ═══════════════════════════════════════════ */
+.box {
+  position: relative;
+}
+
+/* Imágenes sueltas (tarjetas con 1 sola imagen): solo flotan */
+.box img {
+  position: relative;
+  filter: drop-shadow(0 6px 10px rgba(12, 245, 255, 0.12));
+  animation: img-flotar 4s ease-in-out infinite;
+  transition: scale 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+              rotate 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+              filter 0.4s ease;
+  will-change: translate, scale, rotate;
+}
+
+/* Imagen vacía: no se muestra */
+.box img[src=""] {
+  display: none;
+}
+
+@keyframes img-flotar {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -7px; }
+}
+
+/* ── CARRUSEL: tarjetas con varias imágenes ──
+   La 1.ª imagen conserva su espacio; las demás se apilan encima.
+   Ciclo de 9 s = 3 imágenes x 3 s cada una. */
+.box img:not(:only-of-type) {
+  opacity: 0;
+  pointer-events: none;
+  animation: img-flotar 4.8s ease-in-out infinite,
+             img-ciclo 9s ease-in-out infinite;
+}
+
+.box img:not(:first-of-type) {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: calc(100% - 40px);
+  margin-bottom: 0;
+}
+
+/* Turnos: la 1.ª se ve de 0 a 3 s, la 2.ª de 3 a 6 s, la 3.ª de 6 a 9 s */
+.box img:nth-of-type(1):not(:only-of-type) { animation-delay: 0s,    0s; }
+.box img:nth-of-type(2):not(:only-of-type) { animation-delay: -1.4s, -6s; }
+.box img:nth-of-type(3):not(:only-of-type) { animation-delay: -2.8s, -3s; }
+
+@keyframes img-ciclo {
+  0%   { opacity: 0; transform: perspective(600px) translateX(70px)  rotateY(-35deg) scale(0.85); }
+  6%   { opacity: 1; transform: perspective(600px) translateX(0)     rotateY(0)      scale(1); }
+  30%  { opacity: 1; transform: perspective(600px) translateX(0)     rotateY(0)      scale(1); }
+  36%  { opacity: 0; transform: perspective(600px) translateX(-70px) rotateY(35deg)  scale(0.85); }
+  100% { opacity: 0; transform: perspective(600px) translateX(-70px) rotateY(35deg)  scale(0.85); }
+}
+
+/* Al pasar el mouse por la tarjeta: el carrusel se detiene,
+   la imagen crece un poco y todo brilla */
+.box:hover img {
+  filter: drop-shadow(0 0 10px rgba(12, 245, 255, 0.35));
+}
+
+.box:hover img:not(:only-of-type) {
+  animation-play-state: running, paused;
+  scale: 1.08;
+}
+
+/* Tarjetas con 1 sola imagen: crece, gira y brilla al pasar el mouse */
+.box img:only-of-type:hover {
+  scale: 1.15;
+  rotate: -3deg;
+  z-index: 2;
+  filter: drop-shadow(0 0 16px rgba(12, 245, 255, 0.8)) brightness(1.12);
+}
+
+/* Respeta a quien prefiere menos movimiento: solo se ve la 1.ª imagen */
+@media (prefers-reduced-motion: reduce) {
+  .box img {
+    animation: none !important;
+    transition: none;
+  }
+  .box img:first-of-type {
+    opacity: 1;
+  }
+}
+
 .tag-cat {
   font-size: 0.75rem;
   color: #0cf5ff;
@@ -344,27 +602,70 @@ body {
   margin: 10px 0;
 }
 
-/* FOOTER */
+/* FOOTER (centrado) */
 .footer {
-  background: #03050b;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, #0a1020, #03050b 70%);
   border-top: 2px solid #ff3c6f;
-  padding: 40px 20px 20px;
+  padding: 45px 20px 20px;
   margin-top: 60px;
+  text-align: center;
+}
+
+/* Línea de luz cian centrada sobre el borde */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(420px, 60%);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0cf5ff, transparent);
+  box-shadow: 0 0 14px #0cf5ff;
+}
+
+.footer-brand {
+  margin-bottom: 35px;
+}
+
+.footer-brand .logo {
+  display: inline-block;
+}
+
+.footer-brand p {
+  margin-top: 6px;
+  color: #5a6a8a;
+  font-size: 0.9rem;
 }
 
 .footer-content {
-  max-width: 1300px;
+  max-width: 1000px;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 35px 30px;
+  justify-items: center;
+  text-align: center;
 }
 
 .link h3 {
   font-family: 'Orbitron';
+  font-size: 1.05rem;
+  letter-spacing: 1px;
   margin-bottom: 15px;
   color: #0cf5ff;
+}
+
+/* Rayita de color centrada bajo cada título */
+.link h3::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin: 8px auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #ff3c6f, #0cf5ff);
 }
 
 .link ul {
@@ -381,14 +682,105 @@ body {
 
 .link ul li a:hover {
   color: #ff3c6f;
-  transform: translateX(4px);
+  transform: translateY(-2px);
 }
 
 .footer-copy {
+  max-width: 1000px;
+  margin: 40px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(12, 245, 255, 0.15);
   text-align: center;
-  margin-top: 40px;
   color: #5a6a8a;
   font-size: 0.85rem;
+}
+
+/* COLUMNAS DEL FOOTER CENTRADAS (Categorías, Soporte y Síguenos) */
+.link {
+  text-align: center;
+}
+
+/* Si en el HTML falta la etiqueta <footer>, las columnas quedan sueltas
+   dentro del <body>: así igual se muestran en una fila y centradas */
+body > .link {
+  display: inline-block;
+  vertical-align: top;
+  width: calc(33.333% - 1px);
+  margin: 60px -0.3em 0 0;
+  padding: 45px 20px 10px;
+  border-top: 2px solid #ff3c6f;
+}
+
+@media (max-width: 700px) {
+  body > .link {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+/* BOTONES DE REDES SOCIALES */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: rgba(12, 245, 255, 0.05);
+  border: 1px solid rgba(12, 245, 255, 0.3);
+  color: #e7e2e2;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s, background 0.25s, color 0.25s;
+}
+
+.social-btn:hover {
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.social-btn:focus-visible {
+  outline: 2px solid #0cf5ff;
+  outline-offset: 3px;
+}
+
+/* Cada red con el color de su marca al pasar el mouse */
+.social-links .social-btn:nth-child(1):hover {
+  background: rgba(24, 119, 242, 0.2);
+  border-color: #1877f2;
+  box-shadow: 0 0 16px rgba(24, 119, 242, 0.6);
+}
+
+.social-links .social-btn:nth-child(2):hover {
+  background: rgba(255, 60, 111, 0.2);
+  border-color: #ff3c6f;
+  box-shadow: 0 0 16px rgba(255, 60, 111, 0.6);
+}
+
+.social-links .social-btn:nth-child(3):hover {
+  background: rgba(88, 101, 242, 0.2);
+  border-color: #5865f2;
+  box-shadow: 0 0 16px rgba(88, 101, 242, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-2, .btn-3, .btn-4, .social-btn {
+    transition: none;
+  }
+  .btn-2::after, .btn-3::after, .btn-4::after {
+    display: none;
+  }
 }
 
 /* RESPONSIVE DESIGN */
