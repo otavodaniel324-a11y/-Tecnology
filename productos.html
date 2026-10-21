@@ -4,88 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TECNOLOGY S.A.S — Productos</title>
+  <title>Productos</title>
   <link rel="shortcut icon" href="Imagenes/Imagen.png" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  
-  <style>
-    /* ══════════════════════════════════════════
-       ESTILOS DEL FONDO ANIMADO ÉPICO (NEÓN Y CANVAS)
-       ══════════════════════════════════════════ */
-    body {
-      background: #02040a;
-      color: #eef2ff;
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    #bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -3;
-      pointer-events: none;
-    }
-
-    .cyber-glow {
-      position: fixed;
-      inset: 0;
-      background: 
-        radial-gradient(circle at 20% 20%, rgba(12, 245, 255, 0.18) 0%, transparent 45%),
-        radial-gradient(circle at 80% 80%, rgba(255, 60, 111, 0.15) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(4, 15, 38, 0.6) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    .tech-grid {
-      position: fixed;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      background-image: 
-        linear-gradient(to right, rgba(12, 245, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(12, 245, 255, 0.05) 1px, transparent 1px);
-      background-size: 60px 60px;
-      transform: perspective(600px) rotateX(65deg);
-      animation: gridMove 8s linear infinite;
-      z-index: -2;
-      pointer-events: none;
-    }
-
-    @keyframes gridMove {
-      0% { transform: perspective(600px) rotateX(65deg) translateY(0); }
-      100% { transform: perspective(600px) rotateX(65deg) translateY(60px); }
-    }
-
-    .scan-line {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #0cf5ff, #ff3c6f, transparent);
-      box-shadow: 0 0 15px #0cf5ff, 0 0 30px #ff3c6f;
-      z-index: -1;
-      opacity: 0.7;
-      animation: scanAnimation 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes scanAnimation {
-      0% { top: -2%; opacity: 0; }
-      15% { opacity: 1; }
-      85% { opacity: 1; }
-      100% { top: 102%; opacity: 0; }
-    }
-  </style>
 </head>
+    
 
 <body>
 
@@ -101,14 +28,6 @@
       <a href="index.html" class="logo">TECNOLOGY</a>
       <input type="checkbox" id="menu">
       <label for="menu"><img src="Imagenes/menu.png" class="menu-icono" alt="menú"></label>
-      <nav class="navbar">
-        <ul>
-          <li><a href="productos.html" class="nav-link active">PRODUCTOS</a></li>
-          <li><a href="Dashboard.html" class="nav-link active">DASHBOARD</a></li>
-          <li><a href="servicios.html" class="nav-link">SERVICIOS</a></li>
-          <li><a href="contactos.html" class="nav-link">CONTACTOS</a></li>
-        </ul>
-      </nav>
       <div>
         <ul>
           <li class="submenu">
@@ -131,10 +50,9 @@
         </ul>
       </div>
     </div>
-
     <!-- Page Hero -->
     <div class="page-hero container">
-      <h1 class="page-title">CATÁLOGO <span>COMPLETO</span></h1>
+      <h1 class="page-title">CATÁLOGO <span>TECNOLOGIA</span></h1>
       <p>Encuentra el equipo perfecto para llevar tu setup al siguiente nivel</p>
     </div>
   </header>
@@ -164,67 +82,134 @@
 
       <div class="box" data-cat="teclados">
         <img src="Imagenes/Login 1.png" alt="Teclado Redragon">
+        <img src="Imagenes/Captura 1.png" alt="Teclado Redragon">
+        <img src="Imagenes/Captura 2.png" alt="Teclado Redragon">
         <div class="product-txt">
           <span class="tag-cat">Teclados</span>
           <h3>Teclado Gamer Membrana</h3>
           <p>Redragon Shiva White K512 Rgb Español</p>
           <p class="Precio">$149.000</p>
+          <p>Lo que tienes que saber de este producto</p>
+          <ul>
+            <li>Tipo de switch: Membrana</li>
+            <li>Idioma: Español latinoamericano</li>
+            <li>Layout: QWERTY</li>
+            <li>Color de la retroiluminación: RGB</li>
+            <li>Color del teclado: Blanco</li>
+          </ul>
+          <h4></h4>
           <a href="#" class="Agregar-carrito btn-3" data-id="1">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
       <div class="box" data-cat="consolas">
         <img src="Imagenes/Logi 2.png" alt="Nintendo Switch">
+        <img src="Imagenes/Captura 3.png" alt="Nintendo Switch">
+        <img src="Imagenes/Captura 4.png" alt="Nintendo Switch">
         <div class="product-txt">
           <span class="tag-cat">Consolas</span>
           <h3>Nintendo Switch</h3>
           <p>Oled 64gb Color Blanco/negro</p>
           <p class="Precio">$1.399.900</p>
+          <p>Lo que tienes que saber de este producto</p>
+          <ul>
+            <li>Capacidad: 64 GB.</li>
+            <li>Incluye 2 controles.</li>
+            <li>Resolución de 1920px x 1080px.</li>
+            <li>Memoria RAM de 4GB.</li>
+            <li>Tiene pantalla táctil.</li>
+          </ul>
           <a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
       <div class="box" data-cat="mouse">
-        <img src="Imagenes/logi 3.png" alt="Mouse Jiexin">
+        <img src="Imagenes/logi 3.png" alt="Mouse Vertical">
+        <img src="Imagenes/Captura 5.png" alt="Mouse Vertical">
+        <img src="Imagenes/Captura 6.png" alt="Mouse Vertical">
         <div class="product-txt">
           <span class="tag-cat">Mouse</span>
-          <h3>Mouse Jiexin</h3>
-          <p>Vertical Ergonomico Inalambrico</p>
-          <p class="Precio">$24.000</p>
+          <h3>Mouse Vertical</h3>
+          <p>Ergonómico Jertech Jr322 Bluetooth Recargable</p>
+          <p class="Precio">$66900</p>
+          <p>Lo que tienes que saber de este producto</p>
+          <ul>
+            <li>Es inalámbrico.</li>
+            <li>Puede conectarse a cualquier dispositivo a través de Bluetooth.</li>
+            <li>Resolución de 1920px x 1080px.</li>
+            <li>Memoria RAM de 4GB.</li>
+            <li>Orientación de la mano: diestro.</li>
+          </ul>
           <a href="#" class="Agregar-carrito btn-3" data-id="3">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
       <div class="box" data-cat="pcs">
         <img src="Imagenes/logi 4.png" alt="PC Gamer RGB">
+        <img src="Imagenes/Captura 7.png" alt="PC Gamer RGB">
+        <img src="Imagenes/Captura 8.png" alt="PC Gamer RGB">
         <div class="product-txt">
           <span class="tag-cat">PCs</span>
-          <h3>Pc Gamer Rgb</h3>
-          <p>Ryzen 7 5700g + 32gb + Ssd 512gb + Monitor 24</p>
-          <p class="Precio">$3.256.542</p>
+          <h3>Pc Gamer Rgb Cpu</h3>
+          <p>Ryzen 7-5700g + Ram 32gb + 1tb + Led 24</p>
+          <p class="Precio">$4.290.000</p>
+          <p>Lo que tienes que saber de este producto</p>
+          <ul>
+            <li>Tarjeta gráfica: Negro</li>
+            <li>Capacidad del disco: 1 TB</li>
+            <li>Memoria RAM: 32 GB</li>
+            <li>Modelo del procesador: Amd Ryzen 7 5700G</li>
+            <li>Línea del procesador: Ryzen 7</li>
+          </ul>
           <a href="#" class="Agregar-carrito btn-3" data-id="4">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
       <div class="box" data-cat="accesorios">
         <img src="Imagenes/logi 5.png" alt="Cargador PS5">
+        <img src="Imagenes/Captura 9.png" alt="Cargador PS5">
+        <img src="Imagenes/Captura 10.png" alt="Cargador PS5">
+        <img src="" alt="">
         <div class="product-txt">
           <span class="tag-cat">Accesorios</span>
           <h3>Cargador Doble PS5</h3>
-          <p>Mandos Dualsense Con Pantalla LED y USB</p>
+          <p>Dualsense Led Antideslizante Carga</p>
           <p class="Precio">$64.158</p>
+          <p>Lo que tienes que saber de este producto</p>
+          <ul>
+            <li>Tipo de alimentación: batería/corriente doméstica.</li>
+            <li>Material: abs.</li>
+            <li>Cantidad de puertos de carga: 2.</li>
+            <li>El tiempo de carga es de 1.5h.</li>
+            <li>Dimensiones: 5.5cm x 5.2cm y 14cm.</li>
+          </ul>
           <a href="#" class="Agregar-carrito btn-3" data-id="5">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
       <div class="box" data-cat="monitores">
         <img src="Imagenes/Logi 6.png" alt="Monitor HP Omen">
+        <img src="Imagenes/Captura 11.png" alt="Monitor HP Omen">
+        <img src="Imagenes/Captura 12.png" alt="Monitor HP Omen">
         <div class="product-txt">
           <span class="tag-cat">Monitores</span>
           <h3>Hp Omen 27</h3>
           <p>FHD 1920×1080 · 180hz · 1ms</p>
           <p class="Precio">$769.900</p>
+          <p>Lo que tienes que saber de este producto</p>
+          <ul>
+            <li>Tamaño de la pantalla: 27 "</li>
+            <li>Es curvo: No</li>
+            <li>Tipo de resolución:QHD</li>
+            <li>El tiempo de carga es de 1.5h.</li>
+          </ul>
           <a href="#" class="Agregar-carrito btn-3" data-id="6">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -235,7 +220,16 @@
           <h3>Silla Gamer Ergonomica</h3>
           <p>Maxplaygt Sy-gc031, Neg Vlbra</p>
           <p class="Precio">$479.900</p>
+          <p>Lo que tienes que saber de este producto</p>
+          <ul>
+            <li>Tipo de alimentación: batería/corriente doméstica.</li>
+            <li>Material: abs.</li>
+            <li>Cantidad de puertos de carga: 2.</li>
+            <li>El tiempo de carga es de 1.5h.</li>
+            <li>Dimensiones: 5.5cm x 5.2cm y 14cm.</li>
+          </ul>
           <a href="#" class="Agregar-carrito btn-3" data-id="7">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -247,6 +241,7 @@
           <p>Cancelación activa de ruido · 30h batería</p>
           <p class="Precio">$1.250.000</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -258,6 +253,7 @@
           <p>StreamCam Pro · Autofoco IA · Micrófono integrado</p>
           <p class="Precio">$420.000</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="9">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -269,6 +265,7 @@
           <p>256 V, 1 TB, SSD, 16 GB RAM, Pantalla táctil WUXGA Intel Arc</p>
           <p class="Precio">$2.787.695</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="10">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -280,6 +277,7 @@
           <p>90×40cm · Superficie de control · Bordes cosidos</p>
           <p class="Precio">$85.000</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="11">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -291,6 +289,7 @@
           <p>QWERTY Romer-G inglés internacional RGB</p>
           <p class="Precio">$193.954</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="12">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -302,6 +301,7 @@
           <p>Loix Digital Sport Tactil Tecnologico 76-3</p>
           <p class="Precio">$508.750</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="13">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -313,6 +313,7 @@
           <p>Alpha65 Robot 65w Usb C Para iPhone Amarillo</p>
           <p class="Precio">$391.974</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="14">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -324,6 +325,7 @@
           <p>990 Pro de 1 TB 7450 MB/s</p>
           <p class="Precio">$1.349.900</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="15">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -335,6 +337,7 @@
           <p>Inalámbrico · Gatillos ajustables · 40h batería</p>
           <p class="Precio">$680.000</p>
           <a href="#" class="Agregar-carrito btn-3" data-id="16">Agregar al carrito</a>
+          <a href="Pago.html" id="Comprar ahora" class="btn-2">Comprar ahora</a>
         </div>
       </div>
 
@@ -345,18 +348,6 @@
       </div>
     </div>
   </main>
-
-  <!-- ══════════════ FOOTER ══════════════ -->
-  <footer class="footer">
-    <div class="footer-content container">
-      <div class="link">
-        <h3>Navegación</h3>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html">Productos</a></li>
-          <li><a href="servicios.html">Servicios</a></li>
-          <li><a href="contactos.html">Contactos</a></li>
-        </ul>
       </div>
       <div class="link">
         <h3>Categorías</h3>
