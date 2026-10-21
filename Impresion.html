@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impresión de Factura Electrónica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0f0f1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .contenedor {
+            background: #1a1a2e;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Botón Neón */
+        .btn-factura-neon {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 30px auto;
+            padding: 18px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            background: transparent;
+            border: 2px solid #00f0ff;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+            text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff;
+        }
+
+        .btn-factura-neon:hover {
+            background: #00f0ff;
+            color: #0f0f1a;
+            box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff, 0 0 80px #00f0ff;
+            text-shadow: none;
+        }
+
+        .btn-factura-neon:active {
+            transform: scale(0.97);
+            box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+        }
+
+        /* Factura */
+        .factura {
+            background: #fff;
+            color: #222;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+            display: none; /* Se muestra al hacer clic */
+        }
+
+        .factura.visible {
+            display: block;
+        }
+
+        .factura-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00bcd4;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .factura-header h1 {
+            font-size: 1.8rem;
+            color: #00bcd4;
+        }
+
+        .factura-header .empresa {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .factura-header .empresa strong {
+            color: #00bcd4;
+            font-size: 1.1rem;
+        }
+
+        .factura-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .factura-info div {
+            line-height: 1.6;
+        }
+
+        .factura-info .label {
+            font-weight: bold;
+            color: #00bcd4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        th {
+            background: #00bcd4;
+            color: #fff;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.9rem;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            border-top: 2px solid #00bcd4;
+            padding-top: 15px;
+        }
+
+        .total span {
+            color: #00bcd4;
+        }
+
+        .factura-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        /* Estilos de impresión */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                display: block;
+            }
+
+            .contenedor {
+                box-shadow: none;
+                padding: 0;
+                background: #fff;
+                max-width: 100%;
+            }
+
+            .btn-factura-neon {
+                display: none !important;
+            }
+
+            .factura {
+                display: block !important;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 20px;
+                background: #fff;
+                color: #000;
+            }
+
+            .factura-header h1 {
+                color: #000;
+            }
+
+            th {
+                background: #ddd !important;
+                color: #000 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .total span {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <!-- BOTÓN IMPRESIÓN FACTURA -->
+        <button id="btn-factura-electronica" class="btn-factura-neon" type="button">
+            🧾 Impresión de Factura
+        </button>
+
+        <!-- FACTURA DE EJEMPLO -->
+        <div id="factura" class="factura">
+            <div class="factura-header">
+                <h1>FACTURA</h1>
+                <div class="empresa">
+                    <strong>TECNOLOGY</strong><br>
+                    NIT: 900.123.456-7<br>
+                    Dirección: Calle 123 #45-67<br>
+                    Tel: (601) 123 4567
+                </div>
+            </div>
+
+            <div class="factura-info">
+                <div>
+                    <span class="label">Factura No:</span> FE-2024-0001<br>
+                    <span class="label">Fecha:</span> 15/01/2024<br>
+                    <span class="label">Hora:</span> 10:30:00
+                </div>
+                <div>
+                    <span class="label">Cliente:</span> Juan Pérez<br>
+                    <span class="label">NIT/CC:</span> 123.456.789-0<br>
+                    <span class="label">Dirección:</span> Carrera 10 #20-30
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Cant.</th>
+                        <th>Vr. Unit.</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P001</td>
+                        <td>Producto de ejemplo 1</td>
+                        <td>2</td>
+                        <td>$50,000</td>
+                        <td>$100,000</td>
+                    </tr>
+                    <tr>
+                        <td>P002</td>
+                        <td>Servicio de ejemplo 2</td>
+                        <td>1</td>
+                        <td>$150,000</td>
+                        <td>$150,000</td>
+                    </tr>
+                    <tr>
+                        <td>P003</td>
+                        <td>Producto de ejemplo 3</td>
+                        <td>3</td>
+                        <td>$25,000</td>
+                        <td>$75,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="total">
+                TOTAL A PAGAR: <span>$325,000</span>
+            </div>
+
+            <div class="factura-footer">
+                Esta es una factura electrónica generada para fines de ejemplo.<br>
+                Gracias por su preferencia.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('btn-factura-electronica');
+            const factura = document.getElementById('factura');
+
+            btn.addEventListener('click', function() {
+                // Mostrar la factura si está oculta
+                factura.classList.add('visible');
+
+                // Pequeña espera para que el navegador renderice el cambio y luego imprimir
+                setTimeout(() => {
+                    window.print();
+                }, 100);
+            });
+
+            // Opcional: ocultar la factura después de imprimir (o dejarla visible)
+            window.addEventListener('afterprint', function() {
+                // Si quieres que se oculte después de imprimir, descomenta la siguiente línea:
+                // factura.classList.remove('visible');
+            });
+        });
+    </script>
+</body>
+</html>

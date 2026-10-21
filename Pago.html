@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago-opciones-carrito</title>
+    <!-- Vinculación del archivo CSS externo -->
+    <link rel="stylesheet" href="Pago.css">
+</head>
+<body>
+
+    <div class="header-img">
+        <img src="Imagenes/F1.webp" alt="hero">
+    </div>
+
+    <!-- ══════════════ FORMULARIO DE PAGO DIRECTO ══════════════ -->
+    <section class="checkout-section container" id="checkout-payment">
+        <h2>Formulario de Pago Directo</h2>
+        
+        <form id="payment-form">
+          
+            <!-- Datos del Cliente -->
+            <div class="form-row">
+                <input type="text" id="nombre-cliente" placeholder="Cliente" required>
+                <input type="text" id="producto-cliente" placeholder="Producto" required>
+                <input type="email" id="email-cliente" placeholder="Correo Electrónico" required>
+            </div>
+
+            <div class="form-row">
+                <input type="tel" id="telefono-cliente" placeholder="Teléfono / WhatsApp" required>
+                <input type="text" id="documento-cliente" placeholder="Cédula / Documento" required>
+            </div>
+
+            <div class="form-row">
+                <input type="text" id="nit-empresa" placeholder="Nit / Empresa">
+                <input type="text" id="iva-calculo" placeholder="+ IVA">
+                <input type="text" id="valor-pagar" placeholder="Valor a Pagar">
+            </div>
+
+            <!-- Selección del Medio de Pago -->
+            <label for="metodo-pago">Selecciona Medio de Pago:</label>
+            <select id="metodo-pago" required onchange="togglePaymentFields()">
+                <option value="" disabled selected>-- Selecciona un método --</option>
+                <option value="nequi">Efectivo</option>
+                <option value="nequi">Nequi</option>
+                <option value="daviplata">Daviplata</option>
+                <option value="pse">PSE (Débito Bancario)</option>
+                <option value="transf">Transferencia Bancaria Directa (Bancolombia/Davivienda)</option>
+            </select>
+
+            <!-- Campos dinámicos según el método elegido -->
+            <div id="campo-banco">
+                <label for="banco-select">Selecciona tu Banco:</label>
+                <select id="banco-select">
+                    <option value="bancolombia">Bancolombia</option>
+                    <option value="davivienda">Davivienda</option>
+                    <option value="banco_bogota">Banco de Bogotá</option>
+                    <option value="bbva">BBVA Colombia</option>
+                    <option value="lulo">Lulo Bank</option>
+                </select>
+            </div>
+
+            <div id="campo-comprobante">
+                <label for="comprobante">Adjuntar Comprobante o Recibo de Transferencia:</label>
+                <input type="file" id="comprobante" accept="image/*,.pdf">
+            </div>
+
+            <!-- BOTÓN FACTURA ELECTRÓNICA AGREGADO -->
+            <button id="btn-factura-electronica" class="btn-factura-neon" type="button">
+                🧾 Factura Electrónica
+            </button>
+
+            <!-- BOTÓN IMPRESIÓN FACTURA ELECTRÓNICA AGREGADO -->
+            <button id="btn-factura-electronica" class="btn-factura-neon" type="button">
+                🧾 Impresión de Factura
+                <a href="Impresion.html">Impresion</a>
+            </button>
+
+            <button type="submit" class="btn-1">Confirmar y Finalizar Pago</button>
+        </form>
+    </section>
+
+    <!-- Script interactivo del Formulario de Pago -->
+    <script>
+        function togglePaymentFields() {
+            const metodo = document.getElementById('metodo-pago').value;
+            const campoBanco = document.getElementById('campo-banco');
+            
+            if (metodo === 'pse' || metodo === 'transf') {
+                campoBanco.style.display = 'flex'; /* Cambiado a flex para heredar el orden vertical estructurado */
+            } else {
+                campoBanco.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
