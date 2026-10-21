@@ -30,7 +30,6 @@ body {
   line-height: 1.5;
   color: var(--texto);
   background-color: var(--fondo);
-  /* Cuadrícula tipo plano de circuito */
   background-image:
     linear-gradient(rgba(46, 139, 255, 0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(46, 139, 255, 0.07) 1px, transparent 1px),
@@ -53,11 +52,10 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;      /* muestra la imagen completa, sin recortar */
+  object-fit: contain;
   object-position: center;
 }
 
-/* Línea de escaneo que recorre la base del encabezado (único movimiento fijo de la página) */
 .header-img::after {
   content: "";
   position: absolute;
@@ -91,7 +89,6 @@ body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
 }
 
-/* Esquinas tipo marco de interfaz */
 .checkout-section::before,
 .checkout-section::after {
   content: "";
@@ -201,7 +198,7 @@ select option { background: var(--campo); color: var(--texto); }
 
 /* ═══════════════ CAMPOS DINÁMICOS ═══════════════ */
 #campo-banco {
-  display: none;               /* el script lo cambia a flex */
+  display: none;
   flex-direction: column;
   gap: 6px;
 }
@@ -249,6 +246,7 @@ input[type="file"]::file-selector-button:hover { background: var(--cian); }
 /* ═══════════════ BOTONES ═══════════════ */
 .btn-1,
 .btn-factura-neon {
+  display: block; /* Asegura que el enlace <a> se comporte como bloque */
   width: 100%;
   padding: 14px 20px;
   font-family: var(--fuente-titulo);
@@ -258,6 +256,8 @@ input[type="file"]::file-selector-button:hover { background: var(--cian); }
   border-radius: 3px;
   cursor: pointer;
   transition: transform 0.15s, background 0.2s, color 0.2s, box-shadow 0.2s;
+  text-decoration: none; /* Por si se aplica a un enlace */
+  box-sizing: border-box;
 }
 
 /* Acción principal */
@@ -281,6 +281,7 @@ input[type="file"]::file-selector-button:hover { background: var(--cian); }
   color: var(--cian);
   background: transparent;
   border: 1px solid var(--cian);
+  text-align: center; /* Para centrar el texto del enlace de impresión */
 }
 
 .btn-factura-neon:hover {
@@ -290,7 +291,7 @@ input[type="file"]::file-selector-button:hover { background: var(--cian); }
 }
 
 /* ═══════════════ ACCESIBILIDAD ═══════════════ */
-button:focus-visible {
+button:focus-visible, a:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 3px;
 }
