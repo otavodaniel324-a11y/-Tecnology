@@ -973,96 +973,66 @@ button, input, select { font-family: inherit; }
   }
 }
 
-@media (max-width: 768px) {
-  /* 1. Ajustamos el contenedor principal para que el menú no se desborde */
+@media (max-width: 768px) { - 
+  .menu-icono { display: block; }
+
   .menu-container {
-    position: relative; /* Clave para que el menú absoluto se ancle aquí */
-    flex-wrap: nowrap;  /* Evitamos que el logo y el icono se bajen */
+    flex-wrap: wrap;
     padding: 14px 16px;
-    z-index: 50;        /* Aseguramos que esté por encima del Hero */
   }
 
-  .menu-icono {
-    display: block;
-    z-index: 60;        /* El icono siempre clickeable por encima de todo */
-  }
-
-  /* 2. El menú desplegable */
   .navbar {
     position: absolute;
-    top: calc(100% + 10px); /* Justo debajo de la barra de navegación */
+    top: calc(100% + 8px);
     left: 0;
     right: 0;
     background: rgba(5, 5, 15, 0.98);
-    backdrop-filter: blur(10px); /* Efecto cristal para que se lea bien */
     border: 1px solid var(--cyan-neon);
     border-radius: var(--radius-md);
     display: none;
     z-index: 100;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
-    max-height: 80vh; /* Si hay muchos enlaces, permite hacer scroll */
-    overflow-y: auto;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
   }
 
   .navbar ul {
     flex-direction: column;
-    padding: 16px;
+    padding: 18px;
     align-items: stretch;
-    gap: 8px;
+    gap: 4px;
   }
 
   .nav-link {
     display: block;
-    padding: 14px;
+    padding: 12px;
     text-align: center;
     border-radius: var(--radius-sm);
-    font-size: 1rem; /* Un poco más grande para dedos en móvil */
   }
 
   .nav-link:hover {
     background: var(--cyan-soft);
   }
 
-  /* 3. Cuando se marca el checkbox, mostramos el menú con una animación suave */
-  #menu:checked ~ .navbar {
-    display: block;
-    animation: slideDown 0.3s ease forwards;
-  }
+  #menu:checked ~ .navbar { display: block; }
 
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .header-txt h1 { font-size: 1.9rem; }
 
-  /* 4. Ajustes del Hero para que no se monte con el menú */
-  .header-content { 
-    margin-top: 30px; 
-    padding-top: 10px; /* Espacio extra de seguridad */
-  }
+  .header-content { margin-top: 40px; }
 
-  .header-txt h1 { font-size: 1.8rem; }
-  
-  /* 5. Centrado de secciones */
   .info-txt,
   .app-txt { text-align: center; }
 
   .info-txt h2,
   .app-txt h2 { font-size: 1.5rem; }
 
-  /* 6. Carrito y medios de pago adaptados a móvil */
   #carrito,
   #Medios-de-Pago {
     position: fixed;
     left: 12px;
     right: 12px;
     top: auto;
-    bottom: 20px; /* Lo fijamos abajo para que no se salga de la pantalla */
     min-width: 0;
     width: auto;
     transform: none;
-    border-radius: var(--radius-lg);
-    max-height: 60vh;
-    overflow-y: auto;
   }
 
   #carrito::before,
@@ -1072,7 +1042,6 @@ button, input, select { font-family: inherit; }
     flex-direction: column;
   }
 
-  /* 7. Footer a 2 columnas en tablets */
   .footer-content {
     grid-template-columns: 1fr 1fr;
     text-align: center;
@@ -1080,4 +1049,17 @@ button, input, select { font-family: inherit; }
 
   .social-links { align-items: center; }
 }
+
+@media (max-width: 480px) {
+  .box-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-1, .btn-2 { padding: 10px 20px; font-size: 0.75rem; }
+}
+
 
