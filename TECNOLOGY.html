@@ -8,146 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="Style1.css">
-  <style>
-    /* Estilos del Carrito Integrado según el diseño de la imagen */
-    #carrito {
-      background: #090a14;
-      border: 1px solid #0cf5ff;
-      border-radius: 12px;
-      padding: 20px;
-      width: 340px;
-      box-shadow: 0 0 15px rgba(12, 245, 255, 0.2);
-    }
-
-    .carrito-total-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 15px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(12, 245, 255, 0.2);
-      color: #fff;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: bold;
-    }
-
-    #total-carrito {
-      color: #0cf5ff;
-      font-size: 1.2rem;
-      text-shadow: 0 0 5px #0cf5ff;
-    }
-
-    .pago-opciones-carrito {
-      margin: 15px 0 10px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      text-align: left;
-    }
-
-    .pago-opciones-carrito label {
-      color: #fff;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .pago-opciones-carrito select {
-      width: 100%;
-      padding: 10px;
-      background: #050510;
-      border: 1px solid #0cf5ff;
-      color: #0cf5ff;
-      border-radius: 6px;
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: bold;
-      outline: none;
-    }
-
-    .carrito-acciones {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .btn-pagar-neon {
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 12px 0;
-      border-radius: 8px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 800;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      background: #0cf5ff;
-      color: #000;
-      box-shadow: 0 0 10px #0cf5ff;
-      transition: all 0.3s ease;
-    }
-
-    .btn-pagar-neon:hover {
-      box-shadow: 0 0 20px #0cf5ff;
-    }
-
-    /* Estilo neón para el botón de Factura Electrónica */
-    .btn-factura-neon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px 0;
-      background: rgba(12, 245, 255, 0.05);
-      color: #0cf5ff;
-      border: 1px solid #0cf5ff;
-      border-radius: 8px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(12, 245, 255, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .btn-factura-neon:hover {
-      background: #0cf5ff;
-      color: #050510;
-      box-shadow: 0 0 20px #0cf5ff, 0 0 30px rgba(12, 245, 255, 0.5);
-      transform: translateY(-2px);
-    }
-
-    #vaciar-carrito {
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 12px 0;
-      border-radius: 8px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 800;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      background: #ff3c6f;
-      color: #fff;
-      box-shadow: 0 0 10px #ff3c6f;
-      transition: all 0.3s ease;
-    }
-
-    #vaciar-carrito:hover {
-      box-shadow: 0 0 20px #ff3c6f;
-    }
-  </style>
 </head>
 
 <body>
@@ -168,43 +28,13 @@
       </label>
       <nav class="navbar">
         <ul>
-          <li><a href="productos.html" class="nav-link">PRODUCTOS</a></li>
+          <li><a href="Productos.html" class="nav-link">PRODUCTOS</a></li>
           <li><a href="Dashboard.html" class="nav-link">DASHBOARD</a></li>
           <li><a href="servicios.html" class="nav-link">SERVICIOS</a></li>
           <li><a href="contactos.html" class="nav-link">CONTACTOS</a></li>
         </ul>
       </nav>
 
-      <!-- Carrito Integrado -->
-      <div class="header-actions">
-        <ul>
-          <li class="submenu">
-            <img src="Imagenes/Car2.png" id="img-carrito" alt="carrito">
-            <div id="carrito">
-              <table id="lista-carrito">
-                <thead>
-                  <tr>
-                    <th>Imagen</th><th>Nombre</th><th>Precio</th><th></th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-
-              <!-- Total del Carrito -->
-              <div class="carrito-total-container">
-                <span>Total:</span>
-                <span id="total-carrito">$0</span>
-              </div>
-
-              <!-- Integración de los Botones -->
-              <div class="carrito-acciones">
-                <a href="#checkout-payment" class="btn-pagar-neon">Ir a Pagar</a>
-                <a href="#" id="vaciar-carrito">Vaciar Carrito</a>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
 
       <!-- Hero -->
       <div class="header-content container">
@@ -225,7 +55,7 @@
   <!-- ══════════════ HIPEROFERTAS ══════════════ -->
   <section class="breakfasst-container">
     <h2>Hiperofertas</h2>
-    <p>Horario 7am – 6pm</p>
+    <p>Horarios de atención 7:00 am – 6:00 pm</p>
     <div class="breakfast-grid">
       <div class="gamer-card"><img src="Imagenes/Teclado.png" alt=""><h3>Kit Teclado y Ratón</h3></div>
       <div class="gamer-card"><img src="Imagenes/Mouse.png" alt=""><h3>Mouse Tech GT-10 3200dpi</h3></div>
@@ -235,11 +65,14 @@
     </div>
   </section>
 
-  <!-- ══════════════ INFO ══════════════ -->
+    <!-- ══════════════ INFO ══════════════ -->
   <section class="info">
-    <img class="Torre" src="Imagenes/Torre 1.png" alt="">
     <div class="info-content container">
-      <div class="info-img"><img src="Imagenes/Portal Remote.png" alt=""></div>
+      <!-- NUEVO CONTENEDOR PARA EL SLIDER -->
+      <div class="slider-container">
+        <div class="info-img slider-img active"><img src="Imagenes/Portal Remote.png" alt=""></div>
+        <div class="info-img slider-img"><img src="Imagenes/Torre 1.png" alt=""></div>
+      </div>
     </div>
     <div class="info-txt">
       <h2>La mejor calidad en los productos</h2>
@@ -248,118 +81,6 @@
       <a href="servicios.html" class="btn-1">Nuestros Servicios</a>
     </div>
   </section>
-
-  <!-- ══════════════ PRODUCTOS DESTACADOS ══════════════ -->
-  <main class="Products container">
-    <h2>PRODUCTOS</h2>
-    <div class="box-container" id="lista-1">
-      <div class="box"><img src="Imagenes/Login 1.png" alt="">
-        <div class="product-txt"><h3>Teclado Gamer Membrana</h3><p>Redragon Shiva White K512 Rgb</p>
-          <p class="Precio">$149.000</p><a href="#" class="Agregar-carrito btn-3" data-id="1">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Logi 2.png" alt="">
-        <div class="product-txt"><h3>Nintendo Switch</h3><p>Oled 64gb Color Blanco/negro</p>
-          <p class="Precio">$1.399.900</p><a href="#" class="Agregar-carrito btn-3" data-id="2">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/logi 3.png" alt="">
-        <div class="product-txt"><h3>Mouse Jiexin</h3><p>Vertical Ergonomico Inalambrico</p>
-          <p class="Precio">$24.000</p><a href="#" class="Agregar-carrito btn-3" data-id="3">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/logi 4.png" alt="">
-        <div class="product-txt"><h3>Pc Gamer Rgb</h3><p>Ryzen 7 5700g + 32gb + Ssd 512gb</p>
-          <p class="Precio">$3.256.542</p><a href="#" class="Agregar-carrito btn-3" data-id="4">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/logi 5.png" alt="">
-        <div class="product-txt"><h3>Cargador Doble PS5</h3><p>Con Pantalla LED y USB</p>
-          <p class="Precio">$64.158</p><a href="#" class="Agregar-carrito btn-3" data-id="5">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Reloj Tactil.png" alt="">
-        <div class="product-txt"><h3>Reloj Hombre</h3><p>Loix Digital Sport Tactil Tecnologico 76-3</p>
-          <p class="Precio">$508.750</p><a href="#" class="Agregar-carrito btn-3" data-id="6">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Cargador Usb.png" alt="">
-        <div class="product-txt"><h3>Cargador Gravastar</h3><p>Alpha65 Robot 65w Usb C Para iPhone Amari</p>
-          <p class="Precio">$391.974</p><a href="#" class="Agregar-carrito btn-3" data-id="7">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Memoria ram.png" alt="">
-        <div class="product-txt"><h3>SSD Samsung Nvme</h3><p>990 Pro de 1 TB 7450 MB/s</p>
-          <p class="Precio">$1.349.900</p><a href="#" class="Agregar-carrito btn-3" data-id="8">Agregar al carrito</a></div></div>
-      <div class="box"><img src="Imagenes/Logi 6.png" alt="">
-        <div class="product-txt"><h3>Hp Omen 27</h3><p>FHD 1920x1080 · 180hz · 1ms</p>
-          <p class="Precio">$769.900</p><a href="#" class="Agregar-carrito btn-3" data-id="9">Agregar al carrito</a></div></div>
-      <div class="btn-2" id="load-more">Cargar Más</div>
-    </div>
-    <div style="text-align:center;margin-top:30px;">
-      <a href="productos.html" class="btn-1">Ver catálogo completo →</a>
-    </div>
-  </main>
-
-  <!-- ══════════════ FORMULARIO DE PAGO DIRECTO ══════════════ -->
-  <section class="checkout-section container" id="checkout-payment" style="margin: 50px auto; padding: 20px; background: rgba(10, 10, 25, 0.85); border: 1px solid #0cf5ff; border-radius: 12px; box-shadow: 0 0 15px rgba(12, 245, 255, 0.3);">
-  <h2 style="text-align:center; color:#0cf5ff; font-family:'Orbitron', sans-serif; margin-bottom: 20px;">Formulario de Pago Directo</h2>
-    
-    <form id="payment-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto;">
-      
-      <!-- Datos del Cliente -->
-      <div style="display: flex; gap: 10px;">
-        <input type="text" id="nombre-cliente" placeholder="Cliente" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
-        <input type="text" id="nombre-cliente" placeholder="Nombre del Producto" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
-        <input type="email" id="email-cliente" placeholder="Correo Electrónico" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
-      </div>
-
-      <div style="display: flex; gap: 10px;">
-        <input type="tel" id="telefono-cliente" placeholder="Teléfono / WhatsApp" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
-        <input type="text" id="documento-cliente" placeholder="Cédula / Documento" required style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
-      </div>
-
-      <div style="display: flex; gap: 10px;">
-        <input type="text" id="Nit" placeholder="Nit / Empresa" style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
-        <input type="text" id="Nit" placeholder="+ IVA" style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
-        <input type="text" id="Nit" placeholder="Valor a Pagar" style="flex: 1; padding: 12px; background: #050510; border: 1px solid #ff3c6f; color: #fff; border-radius: 5px;">
-      </div>
-      </div>
-
-      <!-- Selección del Medio de Pago -->
-      <label for="metodo-pago" style="color: #fff; font-family: 'Rajdhani', sans-serif; font-size: 1.1rem;">Selecciona Medio de Pago:</label>
-      <select id="metodo-pago" required style="padding: 12px; background: #050510; border: 1px solid #0cf5ff; color: #fff; border-radius: 5px; font-family: 'Rajdhani', sans-serif;" onchange="togglePaymentFields()">
-        <option value="" disabled selected>-- Selecciona un método --</option>
-        <option value="nequi">Nequi</option>
-        <option value="daviplata">Daviplata</option>
-        <option value="pse">PSE (Débito Bancario)</option>
-        <option value="transf">Transferencia Bancaria Directa (Bancolombia/Davivienda)</option>
-      </select>
-
-      <!-- Campos dinámicos según el método elegido -->
-      <div id="campo-banco" style="display: none;">
-        <label for="banco-select" style="color: #fff;">Selecciona tu Banco:</label>
-        <select id="banco-select" style="width: 100%; padding: 12px; background: #050510; border: 1px solid #0cf5ff; color: #fff; border-radius: 5px; margin-top: 5px;">
-          <option value="bancolombia">Bancolombia</option>
-          <option value="davivienda">Davivienda</option>
-          <option value="banco_bogota">Banco de Bogotá</option>
-          <option value="bbva">BBVA Colombia</option>
-          <option value="lulo">Lulo Bank</option>
-        </select>
-      </div>
-
-      <div id="campo-comprobante" style="display: flex; flex-direction: column; gap: 5px;">
-        <label for="comprobante" style="color: #fff;">Adjuntar Comprobante o Recibo de Transferencia:</label>
-        <input type="file" id="comprobante" accept="image/*,.pdf" style="padding: 10px; background: #050510; border: 1px dashed #0cf5ff; color: #fff; border-radius: 5px;">
-      </div>
-      <!-- BOTÓN FACTURA ELECTRÓNICA AGREGADO -->
-                <button id="btn-factura-electronica" class="btn-factura-neon" type="button">
-                  🧾 Factura Electrónica
-                </button>
-
-      <button type="submit" class="btn-1" style="cursor: pointer; margin-top: 10px; width: 100%;">Confirmar y Finalizar Pago</button>
-    </form>
-  </section>
-
-  <!-- Script interactivo del Formulario de Pago -->
-  <script>
-    function togglePaymentFields() {
-      const metodo = document.getElementById('metodo-pago').value;
-      const campoBanco = document.getElementById('campo-banco');
-      
-      if (metodo === 'pse' || metodo === 'transf') {
-        campoBanco.style.display = 'block';
-      } else {
-        campoBanco.style.display = 'none';
-      }
-    }
-  </script>
 
   <!-- ══════════════ APP ══════════════ -->
   <section class="app container">
@@ -379,7 +100,7 @@
     <div class="footer-content container">
       <div class="link"><h3>Navegación</h3>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
+          <li><a href="Carrito.html">Inicio</a></li>
           <li><a href="productos.html">Productos</a></li>
           <li><a href="servicios.html">Servicios</a></li>
           <li><a href="contactos.html">Contactos</a></li>
