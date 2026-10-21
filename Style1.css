@@ -973,7 +973,7 @@ button, input, select { font-family: inherit; }
   }
 }
 
-@media (max-width: 768px) { - 
+@media (max-width: 768px) {
   .menu-icono { display: block; }
 
   .menu-container {
@@ -1061,5 +1061,4 @@ button, input, select { font-family: inherit; }
 
   .btn-1, .btn-2 { padding: 10px 20px; font-size: 0.75rem; }
 }
-
 
