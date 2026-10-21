@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago-opciones-carrito</title>
+    <title>Pago - TECNOLOGY S.A.S</title>
     <!-- Vinculación del archivo CSS externo -->
     <link rel="stylesheet" href="Pago.css">
 </head>
 <body>
 
     <div class="header-img">
-        <img src="Imagenes/F1.webp" alt="hero">
+        <img src="Imagenes/F1.webp" alt="Cabecera Tecnology">
     </div>
 
     <!-- ══════════════ FORMULARIO DE PAGO DIRECTO ══════════════ -->
@@ -32,7 +32,8 @@
             </div>
 
             <div class="form-row">
-                <input type="text" id="nit-empresa" placeholder="Nit / Empresa">
+                <!-- Nota: Cambié el ID a 'nit' para que coincida con el script del carrito de tu otra página -->
+                <input type="text" id="nit" placeholder="Nit / Empresa">
                 <input type="text" id="iva-calculo" placeholder="+ IVA">
                 <input type="text" id="valor-pagar" placeholder="Valor a Pagar">
             </div>
@@ -41,7 +42,7 @@
             <label for="metodo-pago">Selecciona Medio de Pago:</label>
             <select id="metodo-pago" required onchange="togglePaymentFields()">
                 <option value="" disabled selected>-- Selecciona un método --</option>
-                <option value="nequi">Efectivo</option>
+                <option value="efectivo">Efectivo</option>
                 <option value="nequi">Nequi</option>
                 <option value="daviplata">Daviplata</option>
                 <option value="pse">PSE (Débito Bancario)</option>
@@ -65,16 +66,15 @@
                 <input type="file" id="comprobante" accept="image/*,.pdf">
             </div>
 
-            <!-- BOTÓN FACTURA ELECTRÓNICA AGREGADO -->
+            <!-- BOTÓN FACTURA ELECTRÓNICA -->
             <button id="btn-factura-electronica" class="btn-factura-neon" type="button">
                 🧾 Factura Electrónica
             </button>
 
-            <!-- BOTÓN IMPRESIÓN FACTURA ELECTRÓNICA AGREGADO -->
-            <button id="btn-factura-electronica" class="btn-factura-neon" type="button">
-                🧾 Impresión de Factura
-                <a href="Impresion.html">Impresion</a>
-            </button>
+            <!-- BOTÓN IMPRESIÓN (Corregido: ahora es un <a> con clase de botón) -->
+            <a href="Impresion.html" id="btn-impresion" class="btn-factura-neon" style="text-align: center; text-decoration: none;">
+                🖨️ Impresión de Factura
+            </a>
 
             <button type="submit" class="btn-1">Confirmar y Finalizar Pago</button>
         </form>
@@ -85,11 +85,20 @@
         function togglePaymentFields() {
             const metodo = document.getElementById('metodo-pago').value;
             const campoBanco = document.getElementById('campo-banco');
+            const campoComprobante = document.getElementById('campo-comprobante');
             
+            // Mostrar banco solo si es PSE o Transferencia
             if (metodo === 'pse' || metodo === 'transf') {
-                campoBanco.style.display = 'flex'; /* Cambiado a flex para heredar el orden vertical estructurado */
+                campoBanco.style.display = 'flex';
             } else {
                 campoBanco.style.display = 'none';
+            }
+
+            // Mostrar comprobante solo si es transferencia o efectivo (opcional)
+            if (metodo === 'transf' || metodo === 'efectivo') {
+                campoComprobante.style.display = 'flex';
+            } else {
+                campoComprobante.style.display = 'none';
             }
         }
     </script>
