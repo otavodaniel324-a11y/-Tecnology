@@ -303,44 +303,76 @@ if (filtrosBtns.length) {
   });
 }
 
-// ──────────────────────────────────────────────
-// BUSCADOR (productos.html)
-// ──────────────────────────────────────────────
-const buscador = document.getElementById("buscador");
-if (buscador) {
-  buscador.addEventListener("input", () => {
-    const catActiva = document.querySelector(".filtro-btn.active")?.dataset.cat || "todos";
-    filtrarProductos(catActiva, buscador.value.trim());
-  });
-}
+/* ============================================================
+       1) BÚSQUEDA
+       ============================================================ */
+    function filtrar() {
+        const q = normalizar(el.campo.value);
+        let visibles = 0;
 
-function filtrarProductos(cat, texto) {
-  const boxes = document.querySelectorAll("#lista-1 .box");
-  const sinResult = document.getElementById("sin-resultados");
-  let visibles = 0;
-  const q = texto.toLowerCase();
+        productos.forEach((li) => {
+            const coincide = normalizar(li.dataset.busqueda).includes(q);
+            li.hidden = !coincide;
+            if (coincide) visibles++;
+        });
 
-  if (!document.getElementById("card-anim-style")) {
-    const s = document.createElement("style"); s.id = "card-anim-style";
-    s.textContent = `@keyframes cardSlideIn{from{opacity:0;transform:translateY(30px) scale(0.96)}to{opacity:1;transform:none}}`;
-    document.head.appendChild(s);
+        if (q === '') {
+            el.estado.textContent = '';
+        } else if (visibles === 0) {
+            el.estado.textContent =
+                'No encontramos productos con "' + el.campo.value.trim() + '". Prueba con otra palabra.';
+        } else {
+            el.estado.textContent =
+                visibles + (visibles === 1 ? ' producto encontrado' : ' productos encontrados');
+        }
+    }
+
+// ──────────────────────────────────────────────
+// BUSCADOR DE PRODUCTOS (NUEVO)
+// Filtra los productos mientras se escribe en <input id="buscador">
+// ──────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+  const input = document.getElementById('buscador');
+  if (!input) return; // En las páginas sin buscador no hace nada
+
+  const estado = document.getElementById('estado-busqueda'); // opcional
+
+  // Quita mayúsculas y tildes para que "martillo" y "Martíllo" coincidan
+  const normalizar = texto => texto
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+
+  function buscar() {
+    // Se consulta aquí para incluir también los productos que "Cargar más" agregue después
+    const productos = document.querySelectorAll('#lista-productos > li, #lista-1 > .box');
+    const palabras = normalizar(input.value).split(/\s+/).filter(Boolean);
+    let visibles = 0;
+
+    productos.forEach(function (item) {
+      const texto = normalizar((item.dataset.busqueda || '') + ' ' + item.textContent);
+
+      // Debe contener todas las palabras escritas
+      const coincide = palabras.every(function (p) { return texto.includes(p); });
+
+      item.style.display = coincide ? '' : 'none';
+      if (coincide) visibles++;
+    });
+
+    if (estado) {
+      if (palabras.length === 0) {
+        estado.textContent = '';
+      } else if (visibles === 0) {
+        estado.textContent = 'No se encontraron productos';
+      } else {
+        estado.textContent = visibles + (visibles === 1 ? ' producto encontrado' : ' productos encontrados');
+      }
+    }
   }
 
-  boxes.forEach(box => {
-    const nombre = box.querySelector("h3")?.textContent.toLowerCase() || "";
-    const desc   = box.querySelector("p")?.textContent.toLowerCase() || "";
-    const boxCat = box.dataset.cat || "";
-    const ok = (cat === "todos" || boxCat === cat) && (nombre.includes(q) || desc.includes(q) || q === "");
-    if (ok) {
-      box.classList.remove("oculto");
-      box.style.animation = "cardSlideIn 0.35s ease forwards";
-      visibles++;
-    } else {
-      box.classList.add("oculto");
-    }
-  });
-  if (sinResult) sinResult.style.display = visibles === 0 ? "block" : "none";
-}
+  input.addEventListener('input', buscar);
+});
 
 // ──────────────────────────────────────────────
 // ACORDEÓN FAQ (servicios.html)
